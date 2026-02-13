@@ -1,0 +1,384 @@
+:root {
+    --royal-green: #1B4D3E;
+    --royal-gold: #cfa957;
+    --royal-black: #000000;
+    --royal-white: #ffffff;
+    --royal-bg: #fdfdfd;
+    --light-border: #eeeeee;
+    --text-dark: #2c2c2c;
+    --text-muted: #666666;
+}
+
+/* Minimal Royal Event Booking Page Redesign */
+
+.booking-redesign-container {
+    background-color: #f8f9fa;
+    min-height: 100vh;
+    padding: 60px 0;
+}
+
+/* 1. Main Wrapper */
+.booking-royal-wrapper {
+    background: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+    border: 1px solid #eee;
+}
+
+/* 2. Sidebar Redesign (Minimal) */
+.booking-royal-sidebar {
+    background: var(--royal-green);
+    padding: 40px 30px;
+    color: #ffffff;
+    height: 100%;
+    position: relative;
+}
+
+.booking-royal-sidebar .sidebar-brand {
+    text-align: left;
+    margin-bottom: 30px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 20px;
+}
+
+.booking-royal-sidebar .sidebar-brand h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    color: var(--royal-gold);
+    margin-bottom: 0;
+}
+
+/* Minimal Steps Indicator */
+.royal-steps-nav {
+    margin-top: 30px;
+}
+
+.royal-step-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 25px;
+    transition: all 0.3s ease;
+    opacity: 0.5;
+}
+
+.royal-step-item.active {
+    opacity: 1;
+}
+
+.royal-step-item.completed {
+    opacity: 0.8;
+}
+
+.step-number-pill {
+    width: 32px;
+    height: 32px;
+    border: 1px solid var(--royal-gold);
+    border-radius: 4px;
+    /* Squared off for minimal look */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-right: 15px;
+    background: transparent;
+    transition: all 0.3s ease;
+    flex-shrink: 0;
+}
+
+.royal-step-item.active .step-number-pill {
+    background: var(--royal-gold);
+    color: #fff;
+}
+
+.royal-step-item.completed .step-number-pill {
+    background: transparent;
+    border-color: #fff;
+    color: #fff;
+}
+
+.step-label h5 {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 0px;
+    color: var(--royal-gold);
+    font-weight: 700;
+}
+
+.step-label p {
+    font-size: 1rem;
+    font-weight: 500;
+    margin: 0;
+}
+
+/* 3. Form Container */
+.booking-royal-form-area {
+    padding: 50px;
+}
+
+.booking-royal-header {
+    margin-bottom: 30px;
+}
+
+.booking-royal-header h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    color: var(--royal-green);
+    margin-bottom: 5px;
+    font-weight: 700;
+}
+
+.booking-royal-header p {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+}
+
+/* 4. Form Controls (Neat) */
+.royal-form-group {
+    margin-bottom: 20px;
+}
+
+.royal-form-label {
+    font-weight: 600;
+    color: #444;
+    margin-bottom: 8px;
+    display: block;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.royal-form-control {
+    height: 50px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 10px 15px;
+    transition: all 0.2s ease;
+    font-family: 'Inter', sans-serif;
+    background: #fcfcfc;
+}
+
+.royal-form-control:focus {
+    border-color: var(--royal-green);
+    background: #fff;
+    box-shadow: none;
+    outline: none;
+}
+
+/* Royal Selection Cards (Minimal) */
+.royal-pref-options {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+}
+
+.royal-pref-card {
+    border: 1px solid #ddd;
+    padding: 15px;
+    text-align: center;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    background: #fbfbfb;
+}
+
+.royal-pref-card:hover {
+    border-color: var(--royal-green);
+}
+
+.royal-pref-card.selected {
+    border-color: var(--royal-green);
+    background: var(--royal-green);
+    color: #fff;
+}
+
+.royal-pref-card i {
+    font-size: 1.2rem;
+    margin-bottom: 5px;
+    display: block;
+}
+
+.royal-pref-label {
+    font-weight: 600;
+    font-size: 0.85rem;
+}
+
+/* 5. Buttons (Neat) */
+.btn-royal-submit {
+    background: var(--royal-green);
+    color: #fff;
+    padding: 14px 30px;
+    border: none;
+    border-radius: 4px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
+.btn-royal-submit:hover {
+    background: #143d31;
+    transform: translateY(-1px);
+}
+
+.btn-royal-back {
+    background: transparent;
+    border: 1px solid #ddd;
+    color: #666;
+    padding: 14px 30px;
+    border-radius: 4px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.2s ease;
+}
+
+.btn-royal-back:hover {
+    border-color: #999;
+    color: #333;
+}
+
+/* Progress Bar (Minimal) */
+.royal-progress-bar {
+    height: 2px;
+    background: #eee;
+    margin-bottom: 40px;
+    position: relative;
+}
+
+.royal-progress-fill {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    background: var(--royal-gold);
+    transition: width 0.4s ease;
+}
+
+/* 6. Food Selection Step */
+.category-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    color: var(--royal-green);
+    margin-bottom: 15px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 8px;
+    font-weight: 700;
+}
+
+.food-items-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.food-item-pill {
+    padding: 8px 16px;
+    border: 1px solid #ddd;
+    border-radius: 50px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    background: #fff;
+    color: #444;
+    display: flex;
+    align-items: center;
+    user-select: none;
+}
+
+.food-item-pill:hover {
+    border-color: var(--royal-green);
+    background: #f8f9fa;
+}
+
+.food-item-pill.selected {
+    background: var(--royal-gold);
+    border-color: var(--royal-gold);
+    color: #fff;
+    box-shadow: 0 4px 10px rgba(207, 169, 87, 0.3);
+}
+
+.food-item-pill i {
+    font-size: 0.75rem;
+    opacity: 0.7;
+}
+
+.food-item-pill.selected i {
+    opacity: 1;
+}
+
+/* Success Card Royal */
+.royal-success-container {
+    padding: 100px 0;
+    text-align: center;
+}
+
+.royal-success-card {
+    background: #fff;
+    max-width: 650px;
+    margin: 0 auto;
+    padding: 80px 50px;
+    border-radius: 12px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+    border: 1px solid var(--light-border);
+}
+
+.royal-success-icon {
+    font-size: 5rem;
+    color: var(--royal-gold);
+    margin-bottom: 30px;
+}
+
+.royal-success-card h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.2rem;
+    color: var(--royal-green);
+    margin-bottom: 20px;
+}
+
+.royal-success-card p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: var(--text-muted);
+    margin-bottom: 40px;
+}
+
+/* Responsive */
+@media (max-width: 991px) {
+    .booking-royal-sidebar {
+        border-right: none;
+        border-bottom: 2px solid var(--royal-gold);
+        padding: 40px 20px;
+    }
+
+    .royal-steps-nav {
+        display: flex;
+        justify-content: space-around;
+        margin-top: 20px;
+    }
+
+    .royal-step-item {
+        margin-bottom: 0;
+    }
+
+    .step-label {
+        display: none;
+    }
+
+    .step-number-pill {
+        margin-right: 0;
+    }
+}
+
+@media (max-width: 768px) {
+    .booking-royal-form-area {
+        padding: 40px 20px;
+    }
+
+    .royal-pref-options {
+        grid-template-columns: 1fr;
+    }
+}

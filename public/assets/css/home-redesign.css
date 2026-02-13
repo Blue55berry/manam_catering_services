@@ -1,0 +1,1047 @@
+/* Home Page Redesign Styles */
+
+:root {
+    --dakshin-green: #1B4D3E;
+    /* Approximate dark green from image */
+    --dakshin-light-green: #4CAF50;
+    /* Lighter green for accents */
+    --dakshin-text-light: #F5F5F5;
+    --dakshin-text-dark: #333333;
+    --dakshin-bg-light: #F9F9F9;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    /* Default sans-serif */
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: 'Playfair Display', serif;
+    /* Serif for headings like in the image */
+}
+
+/* Utilities */
+.text-gold {
+    color: #DAA520;
+}
+
+.bg-dakshin {
+    background-color: #0f1c15;
+    /* Very dark green/black */
+}
+
+/* Chef Section - Royal Theme */
+.team-section {
+    background-color: #FCFBF7 !important;
+    /* Royal Parchment Light */
+    background-image: radial-gradient(#DAA520 0.5px, transparent 0.5px);
+    background-size: 20px 20px;
+    opacity: 1;
+}
+
+.royal-team-card .royal-name {
+    font-family: 'Playfair Display', serif;
+    color: #1B4D3E;
+    font-size: 1.5rem;
+}
+
+.royal-team-card:hover .team-img-wrapper {
+    border-color: #1B4D3E !important;
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+}
+
+.royal-team-card .team-img-wrapper {
+    transition: all 0.4s ease;
+}
+
+.royal-team-card:hover .cat-team-social {
+    opacity: 1 !important;
+}
+
+/* Royal Footer Theme Override */
+footer .cat-footer-wrapper {
+    background: linear-gradient(145deg, #000000 0%, #1B4D3E 50%, #0e1211 100%);
+    /* Deep Royal Green Gradient */
+    padding-top: 80px;
+    padding-bottom: 50px;
+    position: relative;
+    border-bottom: none !important;
+}
+
+footer .cat-footer-wrapper::after,
+footer .cat-footer-wrapper::before {
+    display: none !important;
+    content: none !important;
+}
+
+footer .footer-title {
+    color: #DAA520 !important;
+    /* Gold Title */
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    margin-bottom: 25px;
+    position: relative;
+    padding-bottom: 15px;
+}
+
+footer .footer-title::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 50px;
+    height: 2px;
+    background-color: #DAA520;
+    /* Gold underline */
+}
+
+footer p,
+footer li a {
+    color: rgba(255, 255, 255, 0.9) !important;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.95rem;
+    line-height: 1.8;
+    transition: all 0.3s ease;
+}
+
+footer li a:hover {
+    color: #DAA520 !important;
+    padding-left: 8px;
+    /* Slide effect */
+}
+
+/* Social Icons */
+footer .cat-social-link ul li a {
+    background: rgba(255, 255, 255, 0.1);
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+}
+
+footer .cat-social-link ul li a i {
+    color: #fff !important;
+    font-size: 1.1rem;
+}
+
+footer .cat-social-link ul li a:hover {
+    background: #DAA520;
+    transform: translateY(-3px);
+}
+
+footer .cat-social-link ul li a:hover i {
+    color: #1B4D3E !important;
+}
+
+footer i {
+    color: #DAA520 !important;
+    /* Icons in contact list gold */
+}
+
+/* Scroll To Top Button Override */
+.scroll-to-topp {
+    background-color: var(--dakshin-green) !important;
+}
+
+.scroll-to-topp:hover {
+    background-color: #143d23 !important;
+    /* Darker green on hover */
+}
+
+footer p {
+    opacity: 0.8;
+}
+
+footer .cat-social-link ul li a,
+footer .footer-menu ul li a {
+    color: rgba(255, 255, 255, 0.7) !important;
+}
+
+footer .cat-social-link ul li a:hover,
+footer .footer-menu ul li a:hover {
+    color: var(--dakshin-gold) !important;
+    padding-left: 5px;
+}
+
+/* Hero Carousel Wrapper */
+.hero-carousel-wrapper {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+}
+
+/* Hero Section */
+.hero-section {
+    background-color: #0f1c15;
+    background-size: cover;
+    background-position: center right;
+    /* Shift background right to keep left clear */
+    background-repeat: no-repeat;
+    color: white;
+    padding: 140px 0;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Zoom effect removed as requested */
+
+/* Hero Overlay for Better Text Readability */
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to right, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.4) 50%, rgba(0, 0, 0, 0.2) 100%);
+    z-index: 1;
+}
+
+/* Carousel Item Transition - Simple Slide */
+.carousel-item {
+    transition: transform 0.8s ease-in-out;
+}
+
+/* Use Slide Instead */
+.carousel-inner .carousel-item {
+    opacity: 1 !important;
+}
+
+.carousel-inner .carousel-item.active {
+    opacity: 1 !important;
+}
+
+/* Sticky Header Styles */
+header.dakshin-header {
+    background-color: #ffffff;
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    width: 100%;
+    z-index: 1000;
+    position: relative;
+}
+
+/* Global Sticky State */
+header.dakshin-header.sticky-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #ffffff;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    padding: 5px 0;
+    transform: translateY(0) !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+}
+
+/* Hide header initially only on Home Page */
+.is-home header.dakshin-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    transform: translateY(-100%);
+    opacity: 0;
+    pointer-events: none;
+}
+
+header.sticky-header .header-wrapper {
+    padding: 0;
+}
+
+/* Adjust links for sticky header if needed */
+header.sticky-header .main-menu ul li a,
+header.sticky-header .dakshin-nav-link {
+    color: var(--dakshin-green) !important;
+}
+
+header.sticky-header .main-menu ul li a:hover,
+header.sticky-header .dakshin-nav-link:hover {
+    color: #DAA520 !important;
+}
+
+@keyframes slideDown {
+    from {
+        transform: translateY(-100%);
+    }
+
+    to {
+        transform: translateY(0);
+    }
+}
+
+.hero-content {
+    max-width: 600px;
+    z-index: 10;
+    position: relative;
+}
+
+/* Carousel Indicators */
+.carousel-indicators {
+    bottom: 50px;
+    z-index: 15;
+    justify-content: center;
+    gap: 12px;
+}
+
+.carousel-indicators button {
+    width: 30px;
+    height: 4px;
+    border-radius: 2px;
+    margin: 0;
+    background-color: rgba(255, 255, 255, 0.3);
+    border: none;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    opacity: 0.5;
+}
+
+.carousel-indicators button.active {
+    background-color: #DAA520;
+    /* Royal Gold Indicator */
+    width: 60px;
+    opacity: 1;
+}
+
+/* Carousel Controls */
+.carousel-control-prev,
+.carousel-control-next {
+    width: 60px;
+    height: 60px;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    transition: all 0.3s ease;
+    opacity: 0;
+    z-index: 15;
+}
+
+.hero-carousel-wrapper:hover .carousel-control-prev,
+.hero-carousel-wrapper:hover .carousel-control-next {
+    opacity: 1;
+}
+
+.carousel-control-prev {
+    left: 30px;
+}
+
+.carousel-control-next {
+    right: 30px;
+}
+
+.carousel-control-prev:hover,
+.carousel-control-next:hover {
+    background-color: var(--dakshin-green);
+    border-color: var(--dakshin-green);
+    transform: translateY(-50%) scale(1.1);
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    width: 24px;
+    height: 24px;
+}
+
+.hero-subtitle {
+    text-transform: uppercase;
+    letter-spacing: 5px;
+    font-size: 0.85rem;
+    margin-bottom: 25px;
+    color: #DAA520;
+    /* Royal Gold */
+    font-weight: 700;
+    display: inline-block;
+    position: relative;
+    padding-left: 50px;
+    font-family: 'Inter', sans-serif;
+}
+
+.hero-subtitle::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 35px;
+    height: 1px;
+    background: #DAA520;
+}
+
+.hero-title {
+    font-size: clamp(3rem, 8vw, 5.5rem);
+    font-weight: 700;
+    line-height: 1.05;
+    margin-bottom: 35px;
+    color: white;
+    font-family: 'Playfair Display', serif;
+    letter-spacing: -1px;
+}
+
+.view-all {
+    background-color: rgb(80, 191, 80);
+    padding: 10px 20px;
+    border-radius: 5px;
+    color: white;
+    text-decoration: none;
+}
+
+.hero-description {
+    font-size: 1.2rem;
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 50px;
+    line-height: 1.8;
+    max-width: 550px;
+    font-weight: 400;
+}
+
+.hero-buttons .btn {
+    padding: 12px 30px;
+    border-radius: 5px;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    margin-right: 15px;
+    transition: all 0.3s ease;
+}
+
+.btn-primary-dakshin {
+    background: linear-gradient(135deg, #1B4D3E 0%, #2D6F5E 100%);
+    border: none;
+    color: white;
+    padding: 16px 40px !important;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.btn-primary-dakshin:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(27, 77, 62, 0.4);
+    color: white;
+}
+
+.btn-outline-dakshin {
+    background-color: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    color: white;
+    padding: 16px 40px !important;
+    backdrop-filter: blur(5px);
+}
+
+.btn-outline-dakshin:hover {
+    background-color: white;
+    color: #1B4D3E;
+    border-color: white;
+    transform: translateY(-3px);
+}
+
+/* Fix hover state for the royal button */
+.royal-hover-fix:hover,
+.royal-hover-fix:focus,
+.royal-hover-fix:active {
+    background-color: #1B4D3E !important;
+    /* Royal Green Background */
+    color: #DAA520 !important;
+    /* Royal Gold Text */
+    border-color: #1B4D3E !important;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    /* Subtle shadow */
+}
+
+/* Culinary Excellence Section - Royal Theme */
+/* Culinary Excellence Section - Royal Theme with Animated Leaf Pattern */
+.culinary-section {
+    padding: 100px 0;
+    background-color: #FAFAF5;
+    /* Royal Cream Background */
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+
+/* Ensure content is above the pattern */
+.culinary-section .container {
+    position: relative;
+    z-index: 10;
+}
+
+.culinary-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 10px;
+    background: linear-gradient(to right, #1B4D3E, #DAA520, #1B4D3E);
+    z-index: 20;
+}
+
+.culinary-section::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('../images/bg-leaf.svg');
+    background-size: 60px 60px;
+    background-repeat: repeat;
+    opacity: 0.4;
+    z-index: 1;
+    pointer-events: none;
+    /* Gentle animation */
+    animation: leafPatternAnim 60s linear infinite;
+}
+
+@keyframes leafPatternAnim {
+    0% {
+        background-position: 0 0;
+    }
+
+    100% {
+        background-position: 60px 60px;
+    }
+}
+
+
+.section-title-wrapper {
+    text-align: center;
+    margin-bottom: 60px;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.section-title {
+    font-size: 2.5rem;
+    color: var(--dakshin-text-dark);
+    margin-bottom: 20px;
+}
+
+.section-description {
+    color: #666;
+    line-height: 1.6;
+}
+
+/* Masonry Layout for Gallery */
+.gallery-grid {
+    column-count: 4;
+    column-gap: 20px;
+}
+
+/* Gallery Card Effect (Replaces simple hover) */
+.gallery-item.card-effect {
+    background: #FCFBF7;
+    /* Royal Parchment Light */
+    border-radius: 15px;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    width: 100%;
+    margin-bottom: 20px;
+    cursor: pointer;
+    border-bottom: 3px solid transparent;
+}
+
+.gallery-item.card-effect:hover {
+    border-bottom: 3px solid #DAA520;
+    transform: translateY(-10px);
+}
+
+.card-img-block {
+    position: relative;
+    overflow: hidden;
+}
+
+.gallery-item.card-effect img {
+    transition: transform 0.5s ease;
+    width: 100%;
+    display: block;
+    filter: brightness(0.95);
+}
+
+/* Curve Shape Overlay - Gold Accent */
+.curve-shape {
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 100%;
+    height: 30px;
+    background: #FAFAF5;
+    /* Matches section bg */
+    border-top-left-radius: 50% 100%;
+    border-top-right-radius: 50% 100%;
+    z-index: 2;
+}
+
+.gallery-item.card-effect:hover .curve-shape {
+    background: #FCFBF7;
+    /* Match Royal Parchment */
+}
+
+/* Details Section */
+.card-details {
+    text-align: center;
+    padding: 15px 20px 25px;
+    background: #FCFBF7;
+    /* Royal Parchment Light */
+    position: relative;
+    z-index: 3;
+    transition: all 0.3s ease;
+}
+
+.card-title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    /* Default Green */
+    margin-bottom: 10px;
+    transition: color 0.3s;
+    font-family: 'Playfair Display', serif;
+    letter-spacing: -0.5px;
+}
+
+.card-text {
+    font-size: 0.8rem;
+    color: #666;
+    margin-bottom: 15px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.card-btn {
+    display: inline-block;
+    padding: 8px 20px;
+    background: transparent;
+    color: var(--dakshin-green);
+    border: 1px solid var(--dakshin-green);
+    border-radius: 20px;
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 600;
+    transition: all 0.3s;
+    opacity: 0;
+    /* Hidden by default */
+    transform: translateY(10px);
+}
+
+/* Hover States */
+.gallery-item.card-effect:hover {
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+    transform: translateY(-5px);
+}
+
+.gallery-item.card-effect:hover img {
+    transform: scale(1.1);
+    filter: brightness(0.9);
+}
+
+/* On hover, title background fill effect similar to reference */
+.gallery-item.card-effect:hover .card-details {
+    background: #FCFBF7;
+    /* Maintain parchment color */
+}
+
+.gallery-item.card-effect:hover .card-title {
+    color: #143d23;
+}
+
+.gallery-item.card-effect:hover .card-btn {
+    opacity: 1;
+    transform: translateY(0);
+    background: var(--dakshin-green);
+    color: white;
+}
+
+/* Slider Image Wrapper - Handles Floating Animation */
+.food-image-wrapper {
+    animation: float-img 4s ease-in-out infinite;
+}
+
+.food-img {
+    width: 400px;
+    height: 400px;
+    object-fit: cover;
+    /* Shape adjustment for uniqueness */
+    border-radius: 20px 60px 20px 60px;
+    /* Asymmetric organic feel */
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2) !important;
+    transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.3s ease;
+}
+
+@keyframes float-img {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-15px);
+    }
+}
+
+.food-slider-section .badge {
+    box-shadow: 0 4px 6px rgba(220, 53, 69, 0.2);
+}
+
+/* Path to Authentic Flavor Section - Royal Theme */
+.features-section {
+    padding: 100px 0;
+    /* Gradient: Black -> Theme Green (#1B4D3E) -> Dark Metallic/Black */
+    background: linear-gradient(145deg, #000000 0%, #1B4D3E 50%, #0e1211 100%);
+    position: relative;
+}
+
+/* Feature Cards - Original Design with Royal Touch */
+.feature-card {
+    background: white;
+    padding: 40px 30px;
+    border-radius: 12px;
+    /* Slight Gold Top Border for premium feel */
+    border-top: 4px solid #DAA520;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+    height: 100%;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-align: left;
+}
+
+.feature-card:hover {
+    transform: translateY(-7px);
+    /* Soft Gold Shadow on Hover */
+    box-shadow: 0 15px 30px rgba(218, 165, 32, 0.15);
+}
+
+.feature-icon {
+    font-size: 2rem;
+    color: var(--dakshin-green);
+    margin-bottom: 25px;
+    /* Changed from pale green to Pale Royal Cream/Gold to match theme */
+    background: #FFF8E1;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: background-color 0.3s ease;
+}
+
+.feature-card:hover .feature-icon {
+    /* Deepen background on hover */
+    background: #FFECB3;
+}
+
+.feature-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 15px;
+    color: var(--dakshin-text-dark);
+    /* Original dark text */
+    font-family: 'Playfair Display', serif;
+    /* Kept Serif for consistency with new theme headings */
+}
+
+.feature-text {
+    color: #666;
+    /* Original grey text */
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+/* Footer CTA */
+.footer-cta-section {
+    padding: 100px 0;
+    background-color: white;
+    text-align: center;
+}
+
+.cta-title {
+    font-size: 2.5rem;
+    margin-bottom: 40px;
+    font-family: 'Playfair Display', serif;
+}
+
+.cta-buttons .btn {
+    padding: 15px 40px;
+    margin: 0 10px;
+    border-radius: 5px;
+    font-weight: 600;
+}
+
+/* Responsive Masonry */
+@media (max-width: 991px) {
+    .gallery-grid {
+        column-count: 2;
+    }
+
+    .hero-title {
+        font-size: 3rem;
+    }
+
+    /* Carousel Responsive Adjustments */
+    .hero-section {
+        padding: 80px 0;
+        min-height: 70vh;
+    }
+
+    .hero-content {
+        max-width: 100%;
+    }
+
+    .carousel-control-prev {
+        left: 15px;
+    }
+
+    .carousel-control-next {
+        right: 15px;
+    }
+
+    .carousel-control-prev,
+    .carousel-control-next {
+        width: 50px;
+        height: 50px;
+    }
+
+    .carousel-indicators {
+        bottom: 20px;
+    }
+}
+
+@media (max-width: 576px) {
+    .gallery-grid {
+        column-count: 1;
+    }
+
+    .hero-title {
+        font-size: 2rem;
+    }
+
+    /* Mobile Carousel Adjustments */
+    .hero-section {
+        padding: 60px 0;
+        min-height: 60vh;
+    }
+
+    .hero-subtitle {
+        font-size: 0.75rem;
+        letter-spacing: 1px;
+    }
+
+    .hero-description {
+        font-size: 0.95rem;
+    }
+
+    .hero-buttons .btn {
+        padding: 10px 20px;
+        font-size: 0.8rem;
+        margin-bottom: 10px;
+        display: block;
+        width: 100%;
+    }
+
+    .carousel-control-prev,
+    .carousel-control-next {
+        width: 40px;
+        height: 40px;
+        opacity: 1;
+    }
+
+    .carousel-control-prev {
+        left: 10px;
+    }
+
+    .carousel-control-next {
+        right: 10px;
+    }
+
+    .carousel-indicators {
+        bottom: 15px;
+    }
+
+    .carousel-indicators button {
+        width: 8px;
+        height: 8px;
+        margin: 0 4px;
+    }
+
+    .carousel-indicators button.active {
+        width: 24px;
+    }
+}
+
+/* Dakshin Custom Header */
+.dakshin-header {
+    background-color: #ffffff;
+    padding: 15px 0;
+    /* Adjusted padding */
+    position: relative;
+    /* Changed from absolute to relative for a standard white header */
+    width: 100%;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.cat-logo-wrapper img,
+.dakshin-logo-wrapper img {
+    max-height: 70px;
+    width: auto;
+    transition: transform 0.3s ease;
+    /* Removed individual white background as header is now white */
+}
+
+.cat-logo-wrapper:hover img {
+    transform: scale(1.05);
+}
+
+.dakshin-nav {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.dakshin-nav-link,
+.dakshin-nav-link:visited,
+.dakshin-nav-link:active {
+    color: var(--dakshin-green) !important;
+    /* Changed to dark green */
+    font-weight: 600;
+    margin-left: 35px;
+    font-size: 1rem;
+    text-decoration: none;
+    position: relative;
+    padding: 5px 0;
+    transition: color 0.3s;
+    font-family: 'Inter', sans-serif;
+}
+
+.dakshin-nav-link:hover {
+    color: var(--dakshin-green);
+}
+
+.dakshin-nav-link::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: var(--dakshin-green);
+    transition: width 0.3s ease-in-out;
+}
+
+.dakshin-nav-link:hover::after {
+    width: 100%;
+}
+
+.dakshin-nav .btn {
+    margin-left: 35px;
+    padding: 12px 30px;
+    border-radius: 50px;
+    /* Modern rounded pill shape */
+    box-shadow: 0 4px 15px rgba(46, 125, 50, 0.2);
+    /* Soft shadow */
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+.dakshin-nav .btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(46, 125, 50, 0.3);
+}
+
+/* Global Scrollbar Override */
+body::-webkit-scrollbar-thumb {
+    background-color: var(--dakshin-green) !important;
+}
+
+body::-webkit-scrollbar-track {
+    background-color: #f0fdf4 !important;
+    /* Light green track */
+}
+
+.hero-img {
+    backdrop-filter: blur(1px);
+}
+
+.hero-img {
+    mask-image: linear-gradient(to right, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 1)40%, rgba(0, 0, 0, 1)60%, rgba(0, 0, 0, 0)100%);
+    -webkit-mask-image: linear-gradient(to right, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 1)40%, rgba(0, 0, 0, 1)60%, rgba(0, 0, 0, 0)100%);
+    ;
+}
+
+/* Crafting Legacy Section */
+.legacy-section {
+    padding: 100px 0;
+    background-color: #fff;
+    overflow: hidden;
+}
+
+.legacy-content .sub-title {
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #bfa86b;
+    /* Goldish color */
+    border: 1px solid #bfa86b;
+    padding: 5px 15px;
+    border-radius: 20px;
+    display: inline-block;
+    margin-bottom: 25px;
+}
+
+.legacy-title {
+    font-size: 4rem;
+    font-weight: 300;
+    /* Thin font for sleek look */
+    line-height: 1.1;
+    color: #2c2c2c;
+    margin-bottom: 30px;
+    font-family: 'Playfair Display', serif;
+    /* Or similar elegant font */
+}
+
+.legacy-title .text-green {
+    color: #1a4d2e;
+    /* Deep Green */
+    font-style: italic;
+    font-weight: 400;
+}
+
+.legacy-desc {
+    font-size: 1.1rem;
+    color: #555;
+    line-height: 1.8;
+    margin-bottom: 40px;
+    max-width: 90%;
+}
+
+.legacy-image-wrapper {
+    position: relative;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+.legacy-img {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: transform 0.5s ease;
+}
+
+.legacy-image-wrapper:hover .legacy-img {
+    transform: scale(1.05);
+}

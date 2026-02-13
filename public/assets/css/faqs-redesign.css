@@ -1,0 +1,132 @@
+/* Royal FAQ Page Redesign */
+
+.faq-redesign-wrapper {
+    background-color: var(--royal-bg);
+    min-height: 100vh;
+}
+
+/* 1. Hero Section */
+.faq-hero-section {
+    padding: 80px 0 40px;
+    text-align: center;
+    background: #fff;
+    border-bottom: 1px solid var(--light-border);
+}
+
+.faq-hero-title {
+    font-size: 3.5rem;
+    font-weight: 700;
+    color: var(--royal-green);
+    margin-bottom: 15px;
+    position: relative;
+    display: inline-block;
+}
+
+.faq-hero-title::after {
+    content: '';
+    display: block;
+    width: 80px;
+    height: 3px;
+    background: var(--royal-gold);
+    margin: 15px auto 0;
+}
+
+.faq-hero-subtitle {
+    font-size: 1.1rem;
+    color: var(--text-muted);
+    max-width: 600px;
+    margin: 0 auto;
+    font-style: italic;
+    font-family: 'Inter', sans-serif;
+}
+
+/* 2. FAQ Content */
+.faq-content-section {
+    padding: 80px 0;
+}
+
+.faq-accordion-wrapper {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.accordion-item {
+    background: #fff;
+    border: 1px solid var(--light-border) !important;
+    border-radius: 8px !important;
+    margin-bottom: 15px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
+    transition: all 0.3s ease;
+}
+
+.accordion-item:hover {
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.05);
+}
+
+.accordion-button {
+    padding: 25px 30px;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--royal-green);
+    background: #fff !important;
+    border: none !important;
+    font-family: 'Playfair Display', serif;
+}
+
+.accordion-button:not(.collapsed) {
+    color: var(--royal-gold);
+    box-shadow: none !important;
+}
+
+.accordion-button::after {
+    background-image: none;
+    content: '\f107';
+    /* fa-angle-down */
+    font-family: 'FontAwesome';
+    font-size: 1.5rem;
+    transition: transform 0.3s ease;
+}
+
+.accordion-button:not(.collapsed)::after {
+    transform: rotate(180deg);
+}
+
+.accordion-body {
+    padding: 0 30px 30px;
+    color: var(--text-muted);
+    font-size: 1.05rem;
+    line-height: 1.8;
+}
+
+/* 3. Help Section (Dark Gradient Background) */
+.faq-help-section {
+    padding: 80px 0;
+    background: linear-gradient(145deg, #000000 0%, #1B4D3E 50%, #0e1211 100%);
+    color: #fff;
+    text-align: center;
+}
+
+.faq-help-section h2 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+}
+
+.btn-royal-outline {
+    display: inline-block;
+    padding: 15px 40px;
+    border: 1px solid var(--royal-gold);
+    color: var(--royal-gold);
+    text-decoration: none;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+    margin-top: 20px;
+}
+
+.btn-royal-outline:hover {
+    background: var(--royal-gold);
+    color: #fff;
+}

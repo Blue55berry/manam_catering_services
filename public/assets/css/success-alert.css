@@ -1,0 +1,32 @@
+/* Success Alert Styling */
+.alert.alert-success {
+    animation: slideInDown 0.5s ease-out;
+}
+
+@keyframes slideInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.alert-success .fa-check-circle {
+    animation: checkPulse 1.5s ease-in-out infinite;
+}
+
+@keyframes checkPulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.1);
+    }
+}

@@ -1,0 +1,829 @@
+/* Custom Event Hover Animations */
+.cat-event-section {
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.cat-event-section:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+.cat-event-img {
+    position: relative;
+    overflow: hidden;
+}
+
+.cat-event-img img {
+    transition: transform 0.5s ease;
+}
+
+.cat-event-section:hover .cat-event-img img {
+    transform: scale(1.1);
+}
+
+.cat-event-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(27, 77, 62, 0.9);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+.cat-event-section:hover .cat-event-overlay {
+    opacity: 1;
+}
+
+.cat-event-overlay .cat-link {
+    color: #fff;
+    text-decoration: none;
+    padding: 12px 30px;
+    border: 2px solid #fff;
+    border-radius: 30px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.cat-event-overlay .cat-link:hover {
+    background: #fff;
+    color: #1B4D3E;
+}
+
+/* Search Button Icon Fix */
+.search-btn i.fa-search {
+    font-size: 18px;
+    color: #333;
+    transition: color 0.3s ease;
+}
+
+.search-btn:hover i.fa-search {
+    color: #1B4D3E;
+}
+
+/* Mobile App Section Center Alignment */
+.cat-app-info {
+    text-align: center;
+}
+
+.cat-app-info .cat-heading-wrapper {
+    text-align: center;
+}
+
+.cat-app-btn {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.cat-app-btn a {
+    display: inline-block;
+}
+
+.cat-app-btn img {
+    max-width: 180px;
+    height: auto;
+    transition: transform 0.3s ease;
+}
+
+.cat-app-btn img:hover {
+    transform: scale(1.05);
+}
+
+/* Mobile App Decorative Images */
+.cat-app-wrapper {
+    position: relative;
+    overflow: hidden;
+}
+
+.cat-app-left-img {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1;
+    max-width: 200px;
+}
+
+.cat-app-left-img img {
+    width: 100%;
+    height: auto;
+    animation: bouncing 3s ease-in-out infinite;
+}
+
+.cat-app-right-img {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1;
+    max-width: 250px;
+}
+
+.cat-app-right-img img {
+    width: 100%;
+    height: auto;
+    animation: bouncing 3s ease-in-out infinite;
+    animation-delay: 0.5s;
+}
+
+.cat-app-wrapper .container {
+    position: relative;
+    z-index: 2;
+}
+
+/* Bouncing Animation */
+@keyframes bouncing {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-20px);
+    }
+}
+
+@media (max-width: 991px) {
+
+    .cat-app-left-img,
+    .cat-app-right-img {
+        display: none;
+    }
+}
+
+/* Event Gallery Hover Animations - Red Border Outside, Clean Inside */
+.cat-gallery-section {
+    position: relative;
+    overflow: hidden;
+    border-radius: 8px;
+    margin-bottom: 30px;
+    border: 3px solid transparent;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+    transition: all 0.4s ease;
+}
+
+.cat-gallery-section:hover {
+    transform: translateY(-5px);
+    border-color: #1B4D3E;
+    box-shadow: 0 10px 30px rgba(27, 77, 62, 0.3);
+}
+
+.cat-gallery-img {
+    position: relative;
+    overflow: hidden;
+}
+
+.cat-gallery-img img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    transition: transform 0.5s ease, filter 0.4s ease;
+}
+
+.cat-gallery-section:hover .cat-gallery-img img {
+    transform: scale(1.08);
+    filter: brightness(0.9);
+}
+
+.cat-gallery-img::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.2);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    z-index: 1;
+}
+
+.cat-gallery-section:hover .cat-gallery-img::before {
+    opacity: 1;
+}
+
+.cat-gallery-img::after {
+    content: '\f002';
+    font-family: 'FontAwesome';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    font-size: 30px;
+    color: #fff;
+    background: #1B4D3E;
+    width: 60px;
+    height: 60px;
+    line-height: 60px;
+    text-align: center;
+    border-radius: 50%;
+    z-index: 2;
+    transition: transform 0.4s ease;
+}
+
+.cat-gallery-section:hover .cat-gallery-img::after {
+    transform: translate(-50%, -50%) scale(1);
+}
+
+/* Event Gallery Filter Buttons */
+.cat-gallery-filter {
+    margin-bottom: 40px;
+}
+
+.cat-filter-menu {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.cat-filter-menu li {
+    padding: 10px 30px;
+    background: #fff;
+    border: 2px solid #1B4D3E;
+    border-radius: 30px;
+    color: #1B4D3E;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.cat-filter-menu li:hover,
+.cat-filter-menu li.active {
+    background: #1B4D3E;
+    color: #fff;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(27, 77, 62, 0.3);
+}
+
+/* Instant Site Reveal - No Fade */
+.cat-main-wrapper {
+    opacity: 1 !important;
+}
+
+/* Top Dish Hover Animation */
+.cat-top-dish-section .cat-top-dish-img {
+    overflow: hidden;
+}
+
+.cat-top-dish-section .cat-top-dish-img img {
+    transition: transform 0.5s ease;
+}
+
+.cat-top-dish-section:hover .cat-top-dish-img img {
+    transform: scale(1.1) rotate(3deg);
+}
+
+/* Menu Item Hover Animation */
+.cat-menu-section .cat-pri-icon img {
+    transition: transform 0.4s ease;
+}
+
+.cat-menu-section:hover .cat-pri-icon img {
+    transform: scale(1.2);
+}
+
+/* Modern Menu Card Styling */
+.cat-menu-card {
+    background: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+    margin-bottom: 30px;
+    transition: transform 0.3s ease;
+}
+
+.cat-menu-card:hover {
+    transform: translateY(-5px);
+}
+
+.cat-menu-img {
+    height: 220px;
+    overflow: hidden;
+    background: #f8f9fa;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.cat-menu-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.cat-menu-card:hover .cat-menu-img img {
+    transform: scale(1.1);
+}
+
+.cat-menu-details {
+    padding: 20px;
+    text-align: center;
+}
+
+.cat-menu-title {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 15px;
+    color: #333;
+}
+
+.cat-menu-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 15px;
+}
+
+.cat-menu-price {
+    font-size: 20px;
+    font-weight: 800;
+    color: #333;
+}
+
+.add-to-cart-btn {
+    background: linear-gradient(135deg, #a855f7 0%, #d946ef 100%);
+    /* Purple/Pink Gradient */
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(168, 85, 247, 0.4);
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.add-to-cart-btn:hover {
+    filter: brightness(1.1);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(168, 85, 247, 0.6);
+}
+
+/* Cursor correction */
+.add-to-cart-btn i {
+    font-size: 14px;
+}
+
+/* Navbar Alignment Fixes */
+/* Navbar Alignment Fixes */
+.main-menu-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    /* Space between center group and right group */
+    height: 100%;
+    position: relative;
+}
+
+/* Center Group: Menu + Quote Button */
+.cat-center-nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-grow: 1;
+    /* Takes up remaining space to allow centering */
+    /* To ensure it's truly centered relative to the screen, we might need absolute positioning or grid, 
+       but flex-grow with margin-right to balance logo is a good approximation in this layout */
+}
+
+.cat-center-nav .main-menu {
+    margin-right: 20px;
+}
+
+.cat-center-nav .header-btn {
+    white-space: nowrap;
+    /* Prevent wrapping */
+}
+
+/* Right Group: Search, Cart, Hamburger */
+.cat-header-right {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+    /* Don't shrink */
+}
+
+.menu-btn-wrap {
+    display: flex;
+    align-items: center;
+    margin-right: 0;
+    /* Remove old margin */
+}
+
+.menu-btn-wrap>a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 10px;
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    background-color: #1B4D3E;
+    /* Match theme green color */
+    color: white;
+    transition: all 0.3s ease;
+}
+
+.menu-btn-wrap>a:hover {
+    background-color: #143d23;
+    transform: translateY(-2px);
+}
+
+.menu-btn-wrap .cart-btn {
+    position: relative;
+    margin-right: 0 !important;
+}
+
+.menu-btn-wrap .search-btn i,
+.menu-btn-wrap .cart-btn i {
+    color: white;
+    font-size: 16px;
+}
+
+/* Hamburger Menu Button */
+.menu-btn-wrap .menu-btn {
+    background: transparent;
+    width: auto;
+    height: auto;
+    flex-direction: column;
+    gap: 5px;
+    padding: 0;
+    margin-left: 15px;
+}
+
+.menu-btn-wrap .menu-btn span {
+    background-color: #333;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 991px) {
+    .cat-center-nav {
+        justify-content: flex-end;
+        /* On mobile, menu is hidden or becomes drawer, align remaining items */
+        flex-grow: 0;
+    }
+
+    .cat-center-nav .main-menu {
+        display: none;
+        /* Hide main menu on mobile, handled by JS toggle */
+    }
+
+    /* If you want the 'Get Free Quote' button visible on mobile, keep it. 
+       If it causes crowding, use d-none d-lg-flex class in HTML (which I added). */
+
+    .main-menu-container {
+        justify-content: flex-end;
+        /* Push hamburger to right */
+    }
+}
+
+/* Modern Cart Page Styles */
+.cat-cart-items-wrapper {
+    background: #fff;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+}
+
+.cat-cart-item-card {
+    display: flex;
+    align-items: center;
+    padding: 15px 0;
+    border-bottom: 1px solid #eee;
+    transition: background-color 0.3s ease;
+}
+
+.cat-cart-item-card:last-child {
+    border-bottom: none;
+}
+
+.cat-cart-item-card:hover {
+    background-color: #f9f9f9;
+}
+
+.cat-cart-img {
+    width: 80px;
+    height: 80px;
+    border-radius: 8px;
+    overflow: hidden;
+    margin-right: 15px;
+    background-color: #f8f9fa;
+    /* Light grey background to frame image */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #efefef;
+}
+
+.cat-cart-img img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: cover;
+}
+
+.cat-cart-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.cat-cart-info h4 {
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+.cat-cart-price {
+    font-size: 15px;
+    font-weight: 600;
+    color: #666;
+}
+
+.quantity-control {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    /* Pill shape */
+    padding: 2px;
+    width: fit-content;
+}
+
+/* Cart Quantity Controls */
+.quantity-control {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f8f9fa;
+    /* Light grey background "fade" */
+    border-radius: 50px;
+    padding: 5px 10px;
+    width: fit-content;
+    border: 1px solid #eee;
+}
+
+.qty-btn {
+    width: 30px;
+    height: 30px;
+    border: none;
+    background: #fff;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #333;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    transition: all 0.2s ease;
+}
+
+.qty-btn:hover {
+    background: #1B4D3E;
+    color: #fff;
+}
+
+.qty-input {
+    width: 40px;
+    height: 30px;
+    /* Match button height */
+    border: none;
+    text-align: center;
+    font-weight: 700;
+    font-size: 16px;
+    color: #333;
+    background: #fff;
+    /* Explicit white background */
+    border-radius: 4px;
+    margin: 0 8px;
+    /* Slightly more space */
+    padding: 0;
+    line-height: normal;
+    /* Reset line-height */
+}
+
+.summary-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    font-size: 15px;
+    color: #555;
+}
+
+.summary-total {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 2px solid #f0f0f0;
+    font-size: 18px;
+    font-weight: 800;
+    color: #333;
+}
+
+.checkout-btn {
+    background: linear-gradient(135deg, #1B4D3E 0%, #143d23 100%);
+    /* Green gradient */
+    color: white;
+    font-weight: 700;
+    border: none;
+    padding: 12px;
+    border-radius: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+    display: block;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.checkout-btn:hover {
+    filter: brightness(1.1);
+    box-shadow: 0 5px 15px rgba(27, 77, 62, 0.4);
+    color: white;
+}
+
+/* Checkout Page Styles */
+.cat-checkout-form,
+.cat-checkout-summary {
+    background: #fff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+    margin-bottom: 30px;
+}
+
+.cat-checkout-title {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 25px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid #f0f0f0;
+    position: relative;
+    color: #333;
+}
+
+.cat-checkout-title:after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 50px;
+    height: 2px;
+    background: #1B4D3E;
+    /* Theme Color */
+}
+
+.cat-checkout-form .form-group {
+    margin-bottom: 20px;
+}
+
+.cat-checkout-form label {
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: #444;
+    display: block;
+}
+
+.cat-checkout-form .required {
+    color: #1B4D3E;
+}
+
+.cat-checkout-form .form-control {
+    height: 50px;
+    border: 1px solid #e1e1e1;
+    border-radius: 8px;
+    padding: 0 15px;
+}
+
+.cat-checkout-form .form-control:focus {
+    border-color: #1B4D3E;
+}
+
+.cat-checkout-form textarea.form-control {
+    height: 120px;
+    padding: 15px;
+}
+
+/* Checkout Order Table */
+.checkout-order-table {
+    margin-bottom: 25px;
+}
+
+.checkout-order-table .table th {
+    border-top: none;
+    font-weight: 700;
+    color: #333;
+    padding: 15px 0;
+}
+
+.checkout-order-table .table td {
+    padding: 15px 0;
+    vertical-align: middle;
+    color: #555;
+    border-color: #f0f0f0;
+}
+
+.checkout-order-table .product-qty {
+    margin-left: 5px;
+    color: #888;
+}
+
+.checkout-order-table .order-subtotal td,
+.checkout-order-table .order-total td {
+    font-weight: 700;
+    color: #333;
+}
+
+.checkout-order-table .order-total td {
+    font-size: 18px;
+    border-bottom: none;
+    color: #1B4D3E;
+}
+
+/* Payment Methods */
+.payment-methods {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    border: 1px solid #eee;
+}
+
+.payment-methods .form-check {
+    margin-bottom: 20px;
+    padding: 15px;
+    border: 1px solid #e1e1e1;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    position: relative;
+    padding-left: 45px;
+    /* Space for custom radio or default radio */
+}
+
+.payment-methods .form-check:hover,
+.payment-methods .form-check:focus-within {
+    border-color: #dc3545;
+    background-color: #fff9f9;
+}
+
+.payment-methods .form-check-input {
+    position: absolute;
+    left: 15px;
+    top: 20px;
+    /* Align with title */
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+}
+
+.payment-methods .form-check-label {
+    font-weight: 700;
+    color: #333;
+    font-size: 16px;
+    cursor: pointer;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.payment-info {
+    font-size: 14px;
+    line-height: 1.6;
+    color: #666;
+    margin-top: 5px;
+    display: block !important;
+}
+
+.privacy-policy-text a {
+    color: #dc3545;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+/* Custom Image Hover Effect */
+.image-hover-effect {
+    transition: transform 0.3s ease-in-out;
+}
+
+.image-hover-effect:hover {
+    transform: scale(1.1);
+}

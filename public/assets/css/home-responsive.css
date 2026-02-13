@@ -1,0 +1,120 @@
+/* ========================================
+   HOME PAGE RESPONSIVE FIXES
+   ======================================== */
+
+/* Hero Carousel Mobile */
+@media (max-width: 767px) {
+    .hero-carousel {
+        height: 70vh !important;
+        min-height: 500px !important;
+    }
+
+    .hero-slide {
+        height: 70vh !important;
+        min-height: 500px !important;
+    }
+
+    .hero-content {
+        padding: 20px !important;
+        max-width: 100% !important;
+        text-align: center !important;
+    }
+
+    .hero-content h1 {
+        font-size: 1.75rem !important;
+        line-height: 1.3 !important;
+        margin-bottom: 15px !important;
+    }
+
+    .hero-content p {
+        font-size: 0.95rem !important;
+        margin-bottom: 20px !important;
+    }
+
+    .hero-content .cat-btn {
+        padding: 12px 24px !important;
+        font-size: 14px !important;
+    }
+}
+
+/* Culinary Excellence Gallery Mobile */
+@media (max-width: 767px) {
+    .culinary-gallery {
+        padding: 40px 0 !important;
+    }
+
+    .gallery-grid {
+        grid-template-columns: 1fr !important;
+        gap: 20px !important;
+    }
+
+    .gallery-item {
+        height: 250px !important;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+    .gallery-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+    }
+}
+
+/* Features Section Mobile */
+@media (max-width: 767px) {
+    .features-section .row {
+        margin: 0 !important;
+    }
+
+    .feature-card {
+        margin-bottom: 20px !important;
+    }
+
+    .section-title {
+        font-size: 1.75rem !important;
+        margin-bottom: 20px !important;
+    }
+}
+
+/* Team Section Mobile */
+@media (max-width: 767px) {
+    .team-carousel {
+        padding: 0 15px !important;
+    }
+
+    .team-member-card {
+        margin: 0 10px !important;
+    }
+}
+
+/* Legacy Section Mobile */
+@media (max-width: 991px) {
+    .crafting-legacy {
+        padding: 50px 0 !important;
+    }
+
+    .legacy-content {
+        text-align: center !important;
+        margin-bottom: 30px !important;
+    }
+
+    .legacy-title {
+        font-size: 2rem !important;
+    }
+
+    .legacy-desc {
+        max-width: 100% !important;
+    }
+}
+
+/* Container Spacing Mobile */
+@media (max-width: 575px) {
+    .container {
+        padding-left: 15px !important;
+        padding-right: 15px !important;
+    }
+
+    section {
+        padding-top: 40px !important;
+        padding-bottom: 40px !important;
+    }
+}

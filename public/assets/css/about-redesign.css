@@ -1,0 +1,305 @@
+/* Royal About Page Redesign */
+
+/* 1. Global Variables & Setup */
+:root {
+    --royal-green: #1B4D3E;
+    --royal-gold: #cfa957;
+    --royal-black: #000000;
+    --royal-white: #ffffff;
+    --royal-bg: #fdfdfd;
+    --text-dark: #2c2c2c;
+    --text-muted: #666666;
+    --light-border: rgba(0, 0, 0, 0.08);
+}
+
+body {
+    background-color: var(--royal-bg);
+    color: var(--text-dark);
+    font-family: 'Inter', sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: 'Playfair Display', serif;
+}
+
+/* 2. Header Overrides */
+body:has(.royal-about-wrapper) .dakshin-header {
+    background-color: #ffffff !important;
+    border-bottom: 1px solid var(--light-border) !important;
+}
+
+body:has(.royal-about-wrapper) .dakshin-nav-link {
+    color: var(--royal-green) !important;
+    font-family: 'Playfair Display', serif;
+    font-weight: 600;
+}
+
+body:has(.royal-about-wrapper) .dakshin-nav-link:hover {
+    color: var(--royal-gold) !important;
+}
+
+/* 3. Hero Section */
+.royal-about-hero {
+    padding: 80px 0 60px;
+    text-align: center;
+    background: #fff;
+    border-bottom: 1px solid var(--light-border);
+}
+
+.about-hero-title {
+    font-size: 3.5rem;
+    font-weight: 700;
+    color: var(--royal-green);
+    margin-bottom: 15px;
+    position: relative;
+    display: inline-block;
+}
+
+.about-hero-title::after {
+    content: '';
+    display: block;
+    width: 80px;
+    height: 3px;
+    background: var(--royal-gold);
+    margin: 15px auto 0;
+}
+
+.about-hero-subtitle {
+    font-size: 1.1rem;
+    color: var(--text-muted);
+    max-width: 600px;
+    margin: 0 auto;
+    font-style: italic;
+    font-family: 'Inter', sans-serif;
+}
+
+/* 4. Story Section */
+.royal-story-section {
+    padding: 80px 0;
+    background: var(--royal-bg);
+}
+
+.story-content-wrapper {
+    padding-left: 30px;
+}
+
+.story-subtitle {
+    color: var(--royal-gold);
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 700;
+    display: block;
+    margin-bottom: 15px;
+    font-family: 'Inter', sans-serif;
+}
+
+.story-title {
+    font-size: 2.5rem;
+    color: var(--royal-green);
+    margin-bottom: 25px;
+    line-height: 1.2;
+}
+
+.story-text {
+    color: var(--text-muted);
+    line-height: 1.8;
+    font-size: 1.05rem;
+    margin-bottom: 30px;
+}
+
+.story-image-wrapper {
+    position: relative;
+    padding: 20px;
+}
+
+.story-image-main {
+    width: 100%;
+    border-radius: 4px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+}
+
+.story-features-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+}
+
+.story-feature-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 500;
+    color: var(--text-dark);
+}
+
+.story-feature-item i {
+    color: var(--royal-gold);
+}
+
+/* 5. Stats Section */
+.royal-stats-section {
+    padding: 80px 0;
+    /* Gradient matched from Home Page 'Pillars of Dining' */
+    background: linear-gradient(145deg, #000000 0%, #1B4D3E 50%, #0e1211 100%);
+    color: #fff;
+    text-align: center;
+}
+
+.stat-card-royal {
+    padding: 20px;
+}
+
+.stat-icon {
+    font-size: 40px;
+    color: var(--royal-gold);
+    margin-bottom: 20px;
+    display: inline-block;
+}
+
+.stat-number-royal {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 5px;
+    font-family: 'Playfair Display', serif;
+}
+
+.stat-label-royal {
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    opacity: 0.8;
+    font-family: 'Inter', sans-serif;
+}
+
+/* 6. Team Section - Home Page Style Port */
+.royal-team-section {
+    padding: 100px 0;
+    background: #fff;
+    position: relative;
+}
+
+.section-header-royal {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.section-header-royal h2 {
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--royal-green);
+    margin-bottom: 20px;
+}
+
+.section-header-royal p {
+    color: var(--text-muted);
+    font-size: 1.1rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+/* Home Page Styled Team Card */
+.royal-team-card {
+    text-align: center;
+    padding-bottom: 1.5rem;
+    width: 100%;
+}
+
+.royal-team-card .team-img-wrapper {
+    position: relative;
+    margin: 0 auto;
+    width: 90%;
+    overflow: hidden;
+    border-radius: 200px 200px 20px 20px;
+    /* Distinctive Arch Shape */
+    border: 4px solid var(--royal-gold);
+    transition: transform 0.3s ease;
+}
+
+.royal-team-card:hover .team-img-wrapper {
+    transform: translateY(-10px);
+}
+
+.royal-team-card .team-img-royal {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+}
+
+.royal-team-card .team-info {
+    padding-top: 1.5rem;
+}
+
+.royal-team-card .royal-name {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--royal-green);
+    font-family: 'Playfair Display', serif;
+    margin-bottom: 5px;
+    display: block;
+    /* Ensure block level */
+}
+
+.royal-team-card .team-role {
+    color: var(--royal-gold);
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 600;
+    font-family: 'Inter', sans-serif;
+    display: block;
+}
+
+/* Hover Overlay for Socials (Optional but good for completeness) */
+.team-social-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(27, 77, 62, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+.royal-team-card:hover .team-social-overlay {
+    opacity: 1;
+}
+
+.team-social-overlay a {
+    color: var(--royal-gold);
+    font-size: 1.5rem;
+    margin: 0 10px;
+    transition: color 0.3s ease;
+}
+
+.team-social-overlay a:hover {
+    color: #fff;
+}
+
+/* 7. Responsive */
+@media (max-width: 992px) {
+    .story-content-wrapper {
+        padding-left: 0;
+        margin-top: 40px;
+    }
+
+    .story-image-main {
+        max-width: 100%;
+    }
+
+    .about-hero-title {
+        font-size: 2.5rem;
+    }
+}

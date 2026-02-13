@@ -1,0 +1,9 @@
+/* Green Background for Culinary Gallery Section */
+.culinary-section {
+    background: linear-gradient(to bottom, #ffffff 0%, #ffffff 25%, #1B4D3E 25%, #0f3929 100%);
+    padding-bottom: 100px;
+}
+
+.gallery-grid {
+    padding-top: 80px;
+}

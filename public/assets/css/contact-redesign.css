@@ -1,0 +1,252 @@
+/* Royal Contact Page Redesign */
+
+/* 1. Global Setup & Variables */
+:root {
+    --royal-green: #1B4D3E;
+    --royal-gold: #cfa957;
+    --royal-bg: #fdfdfd;
+    --text-dark: #2c2c2c;
+    --text-muted: #666666;
+    --light-border: rgba(0, 0, 0, 0.08);
+}
+
+body {
+    background-color: var(--royal-bg);
+    color: var(--text-dark);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+    font-family: 'Playfair Display', serif;
+}
+
+/* 2. Header Overrides */
+/* Ensure header blends with the clean royal theme */
+body:has(.contact-redesign-wrapper) .dakshin-header {
+    background-color: #ffffff !important;
+    border-bottom: 1px solid var(--light-border) !important;
+}
+
+body:has(.contact-redesign-wrapper) .dakshin-nav-link {
+    color: var(--royal-green) !important;
+    font-family: 'Playfair Display', serif;
+    font-weight: 600;
+}
+
+body:has(.contact-redesign-wrapper) .dakshin-nav-link:hover {
+    color: var(--royal-gold) !important;
+}
+
+/* 3. Hero Section - Royal Minimalist */
+.contact-hero-section {
+    padding: 80px 0 40px;
+    text-align: center;
+    background: #fff;
+}
+
+.contact-hero-title {
+    font-size: 3.5rem;
+    font-weight: 700;
+    color: var(--royal-green);
+    margin-bottom: 15px;
+    position: relative;
+    display: inline-block;
+}
+
+.contact-hero-title::after {
+    content: '';
+    display: block;
+    width: 80px;
+    height: 3px;
+    background: var(--royal-gold);
+    margin: 15px auto 0;
+}
+
+.contact-hero-subtitle {
+    font-size: 1.2rem;
+    color: var(--text-muted);
+    max-width: 600px;
+    margin: 0 auto;
+    font-style: italic;
+    font-family: 'Inter', sans-serif;
+}
+
+/* 4. Elegant Contact Form Wrapper */
+.contact-main-wrapper {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 20px 80px;
+}
+
+.contact-content-card {
+    background: #fff;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.05);
+    /* Soft premium shadow */
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid rgba(27, 77, 62, 0.05);
+}
+
+/* 5. Contact Info Grid (Top of Card) */
+.contact-info-strip {
+    /* Gradient matched from Home Page 'Pillars of Dining' */
+    background: linear-gradient(145deg, #000000 0%, #1B4D3E 50%, #0e1211 100%);
+    padding: 40px;
+    color: #fff;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    text-align: center;
+}
+
+.info-item h5 {
+    color: var(--royal-gold);
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 700;
+}
+
+.info-item p,
+.info-item a {
+    color: #fff;
+    font-size: 1.1rem;
+    font-family: 'Playfair Display', serif;
+    text-decoration: none;
+    line-height: 1.4;
+    display: block;
+}
+
+.info-item i {
+    font-size: 24px;
+    margin-bottom: 15px;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+/* 6. Form Section */
+.form-section-inner {
+    padding: 60px;
+}
+
+.form-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.form-header h2 {
+    font-size: 2.5rem;
+    color: var(--royal-green);
+    margin-bottom: 10px;
+}
+
+.form-header p {
+    color: var(--text-muted);
+}
+
+/* Custom Input Styles */
+.royal-form-group {
+    position: relative;
+    margin-bottom: 30px;
+}
+
+.royal-input {
+    width: 100%;
+    border: none;
+    border-bottom: 2px solid #e0e0e0;
+    padding: 15px 0;
+    font-size: 1rem;
+    font-family: 'Inter', sans-serif;
+    background: transparent;
+    transition: all 0.3s ease;
+    color: var(--text-dark);
+}
+
+.royal-input:focus {
+    outline: none;
+    border-bottom-color: var(--royal-green);
+}
+
+.royal-input::placeholder {
+    color: transparent;
+    /* Hide default placeholder for label effect */
+}
+
+.royal-label {
+    position: absolute;
+    top: 15px;
+    left: 0;
+    font-size: 1rem;
+    color: #999;
+    transition: all 0.3s ease;
+    pointer-events: none;
+    font-family: 'Inter', sans-serif;
+}
+
+/* Floating Label Logic */
+.royal-input:focus+.royal-label,
+.royal-input:not(:placeholder-shown)+.royal-label {
+    top: -10px;
+    font-size: 0.8rem;
+    color: var(--royal-green);
+    font-weight: 600;
+}
+
+.royal-textarea {
+    resize: none;
+}
+
+/* Submit Button */
+.btn-royal-submit {
+    background: var(--royal-green);
+    color: #fff;
+    border: none;
+    padding: 18px 40px;
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 100%;
+    margin-top: 10px;
+    font-family: 'Inter', sans-serif;
+}
+
+.btn-royal-submit:hover {
+    background: #143d23;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(27, 77, 62, 0.3);
+}
+
+/* 7. Responsive adjustments */
+@media (max-width: 992px) {
+    .contact-info-strip {
+        grid-template-columns: 1fr;
+        padding: 30px;
+        gap: 40px;
+    }
+
+    .contact-info-strip .info-item {
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        padding-bottom: 20px;
+    }
+
+    .contact-info-strip .info-item:last-child {
+        border-bottom: none;
+        padding-bottom: 0;
+    }
+
+    .form-section-inner {
+        padding: 40px 20px;
+    }
+
+    .contact-hero-title {
+        font-size: 2.5rem;
+    }
+}

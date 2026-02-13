@@ -1,0 +1,776 @@
+/* ============================================
+   MODERN ADMIN PANEL - ENHANCED STYLES
+   Manam Catering Service
+   ============================================ */
+
+:root {
+    /* Brand Colors */
+    --admin-primary: #10b981;
+    --admin-primary-dark: #059669;
+    --admin-primary-light: #34d399;
+
+    /* Modern Palette */
+    --admin-indigo: #6366f1;
+    --admin-purple: #8b5cf6;
+    --admin-amber: #f59e0b;
+    --admin-blue: #3b82f6;
+    --admin-red: #ef4444;
+    --admin-orange: #f97316;
+
+    /* Neutrals */
+    --admin-dark: #111827;
+    --admin-dark-2: #1f2937;
+    --admin-dark-3: #374151;
+    --admin-gray: #6b7280;
+    --admin-light-gray: #9ca3af;
+    --admin-lighter-gray: #d1d5db;
+    --admin-bg: #f9fafb;
+    --admin-white: #ffffff;
+
+    /* Shadows */
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+
+    /* Sizes */
+    --sidebar-width: 280px;
+    --transition-speed: 0.3s;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--admin-bg);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    color: var(--admin-dark-3);
+    line-height: 1.6;
+}
+
+/* ============================================
+   SIDEBAR - MODERN & SLEEK
+   ============================================ */
+
+.admin-sidebar {
+    width: var(--sidebar-width);
+    height: 100vh;
+    background: linear-gradient(180deg, #064e3b 0%, #065f46 50%, #047857 100%);
+    position: fixed;
+    top: 0;
+    left: 0;
+    color: white;
+    padding: 0;
+    z-index: 1000;
+    box-shadow: 4px 0 20px rgba(16, 185, 129, 0.2);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.admin-sidebar::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: radial-gradient(circle at 20% 50%, rgba(16, 185, 129, 0.1) 0%, transparent 50%);
+    opacity: 0.6;
+    pointer-events: none;
+}
+
+.sidebar-logo {
+    padding: 32px 24px;
+    font-size: 1.5rem;
+    font-weight: 700;
+    font-family: 'Playfair Display', serif;
+    color: white;
+    background: rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-items: center;
+    letter-spacing: 0.5px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+    position: relative;
+    z-index: 1;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.sidebar-logo::before {
+    content: '🍽️';
+    font-size: 2rem;
+    margin-right: 12px;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+}
+
+.sidebar-menu {
+    list-style: none;
+    padding: 20px 16px;
+    margin: 0;
+    flex: 1;
+    overflow-y: auto;
+    position: relative;
+    z-index: 1;
+}
+
+.sidebar-menu::-webkit-scrollbar {
+    width: 6px;
+}
+
+.sidebar-menu::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+
+.sidebar-menu::-webkit-scrollbar-thumb {
+    background: rgba(16, 185, 129, 0.5);
+    border-radius: 10px;
+}
+
+.sidebar-menu::-webkit-scrollbar-thumb:hover {
+    background: rgba(16, 185, 129, 0.7);
+}
+
+.sidebar-menu li {
+    margin-bottom: 4px;
+    position: relative;
+}
+
+.sidebar-menu li a {
+    display: flex;
+    align-items: center;
+    padding: 14px 20px;
+    color: rgba(255, 255, 255, 0.85);
+    text-decoration: none;
+    border-radius: 10px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    font-weight: 500;
+    font-size: 0.95rem;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Animated Left Slider */
+.sidebar-menu li a::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%) scaleY(0);
+    height: 70%;
+    width: 4px;
+    background: linear-gradient(to bottom, var(--admin-primary-light), var(--admin-primary));
+    border-radius: 0 4px 4px 0;
+    transition: transform 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    box-shadow: 0 0 10px rgba(16, 185, 129, 0.5);
+}
+
+/* Background Glow on Hover */
+.sidebar-menu li a::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at center, rgba(16, 185, 129, 0.15) 0%, transparent 70%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.sidebar-menu li a:hover {
+    background: rgba(16, 185, 129, 0.1);
+    color: white;
+    padding-left: 28px;
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.15);
+}
+
+.sidebar-menu li a:hover::before {
+    transform: translateY(-50%) scaleY(1);
+}
+
+.sidebar-menu li a:hover::after {
+    opacity: 1;
+}
+
+/* Active State with Animated Slider */
+.sidebar-menu li a.active {
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.2) 0%, rgba(16, 185, 129, 0.1) 100%);
+    color: white;
+    font-weight: 600;
+    padding-left: 28px;
+    box-shadow: 0 4px 16px rgba(16, 185, 129, 0.25);
+}
+
+.sidebar-menu li a.active::before {
+    transform: translateY(-50%) scaleY(1);
+    width: 5px;
+    animation: slideIn 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.sidebar-menu li a.active::after {
+    opacity: 1;
+}
+
+/* Glowing Dot Indicator */
+.sidebar-menu li a.active .menu-indicator {
+    position: absolute;
+    right: 20px;
+    width: 8px;
+    height: 8px;
+    background: var(--admin-primary-light);
+    border-radius: 50%;
+    box-shadow: 0 0 12px rgba(16, 185, 129, 0.8);
+    animation: pulse 2s ease-in-out infinite;
+}
+
+.sidebar-menu li a i {
+    margin-right: 12px;
+    font-size: 1.1rem;
+    width: 24px;
+    text-align: center;
+    transition: transform 0.3s ease;
+    z-index: 1;
+}
+
+.sidebar-menu li a:hover i,
+.sidebar-menu li a.active i {
+    transform: scale(1.1);
+}
+
+/* Slide-in Animation */
+@keyframes slideIn {
+    0% {
+        transform: translateY(-50%) scaleY(0);
+        opacity: 0;
+    }
+
+    50% {
+        transform: translateY(-50%) scaleY(1.2);
+    }
+
+    100% {
+        transform: translateY(-50%) scaleY(1);
+        opacity: 1;
+    }
+}
+
+/* Pulse Animation for Active Dot */
+@keyframes pulse {
+
+    0%,
+    100% {
+        box-shadow: 0 0 12px rgba(16, 185, 129, 0.8);
+        transform: scale(1);
+    }
+
+    50% {
+        box-shadow: 0 0 20px rgba(16, 185, 129, 1);
+        transform: scale(1.1);
+    }
+}
+
+.sidebar-menu li a.active::after {
+    content: '';
+    position: absolute;
+    right: 20px;
+    width: 6px;
+    height: 6px;
+    background: var(--admin-primary-light);
+    border-radius: 50%;
+    box-shadow: 0 0 8px rgba(16, 185, 129, 0.8);
+}
+
+.sidebar-menu li a i {
+    margin-right: 12px;
+    font-size: 1.1rem;
+    width: 20px;
+    text-align: center;
+}
+
+/* ============================================
+   SIDEBAR TOGGLE & COLLAPSE
+   ============================================ */
+
+.sidebar-toggle {
+    position: fixed;
+    top: 20px;
+    left: 300px;
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(135deg, var(--admin-primary) 0%, var(--admin-primary-dark) 100%);
+    border: none;
+    border-radius: 12px;
+    color: white;
+    font-size: 1.3rem;
+    cursor: pointer;
+    z-index: 1001;
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.sidebar-toggle:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4);
+}
+
+.sidebar-toggle:active {
+    transform: scale(0.95);
+}
+
+.sidebar-toggle.shifted {
+    left: 20px;
+}
+
+/* Collapsed Sidebar Animation */
+.admin-sidebar.collapsed {
+    transform: translateX(-100%);
+}
+
+.admin-main.expanded {
+    margin-left: 0;
+}
+
+/* Smooth transitions */
+.admin-sidebar {
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.admin-main {
+    transition: margin-left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+    .admin-sidebar {
+        transform: translateX(-100%);
+    }
+
+    .admin-sidebar.collapsed {
+        transform: translateX(-100%);
+    }
+
+    .admin-main {
+        margin-left: 0 !important;
+    }
+
+    .sidebar-toggle {
+        left: 20px;
+    }
+}
+
+/* ============================================
+   MAIN CONTENT AREA
+   ============================================ */
+
+.admin-sidebar.collapsed {
+    background: rgba(16, 185, 129, 0.2);
+    font-weight: 600;
+}
+
+.sidebar-menu li a i {
+    width: 28px;
+    font-size: 1.25rem;
+    margin-right: 14px;
+    text-align: center;
+}
+
+/* ============================================
+   MAIN CONTENT AREA
+   ============================================ */
+
+.admin-main {
+    margin-left: var(--sidebar-width);
+    padding: 40px;
+    min-height: 100vh;
+    transition: margin-left var(--transition-speed);
+}
+
+/* ============================================
+   MODERN STAT CARDS
+   ============================================ */
+
+.stat-card {
+    background: var(--admin-white);
+    border-radius: 16px;
+    padding: 28px;
+    box-shadow: var(--shadow-md);
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 1px solid rgba(0, 0, 0, 0.04);
+}
+
+.stat-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 120px;
+    height: 120px;
+    background: radial-gradient(circle, rgba(16, 185, 129, 0.1) 0%, transparent 70%);
+    border-radius: 50%;
+    transform: translate(40%, -40%);
+}
+
+.stat-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-xl);
+}
+
+.stat-card.primary-gradient {
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    color: white;
+    border: none;
+}
+
+.stat-card.primary-gradient::before {
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.15) 0%, transparent 70%);
+}
+
+.stat-card.secondary-gradient {
+    background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+    color: white;
+    border: none;
+}
+
+.stat-card.tertiary-gradient {
+    background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+    color: white;
+    border: none;
+}
+
+.stat-card .label {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    opacity: 0.85;
+    margin-bottom: 8px;
+    font-weight: 600;
+}
+
+.stat-card .value {
+    font-size: 2.75rem;
+    font-weight: 800;
+    line-height: 1.1;
+    margin-bottom: 8px;
+}
+
+.stat-card .trend {
+    font-size: 0.85rem;
+    opacity: 0.9;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.stat-card .trend i {
+    font-size: 0.75rem;
+}
+
+/* ============================================
+   DASHBOARD WIDGETS
+   ============================================ */
+
+.dashboard-widget {
+    background: white;
+    border-radius: 16px;
+    padding: 28px;
+    box-shadow: var(--shadow-md);
+    margin-bottom: 30px;
+    border: 1px solid rgba(0, 0, 0, 0.04);
+    transition: all 0.3s ease;
+}
+
+.dashboard-widget:hover {
+    box-shadow: var(--shadow-lg);
+}
+
+.widget-title {
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin-bottom: 24px;
+    color: var(--admin-dark);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 16px;
+    border-bottom: 2px solid var(--admin-bg);
+}
+
+.widget-title i {
+    margin-right: 10px;
+    color: var(--admin-primary);
+}
+
+/* ============================================
+   MODERN TABLES
+   ============================================ */
+
+.table-responsive {
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.table-modern {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+.table-modern thead th {
+    background: linear-gradient(180deg, #f9fafb 0%, #f3f4f6 100%);
+    padding: 16px 18px;
+    color: var(--admin-dark-3);
+    font-weight: 700;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    border-bottom: 2px solid #e5e7eb;
+    text-align: left;
+}
+
+.table-modern tbody tr {
+    transition: all 0.2s ease;
+}
+
+.table-modern tbody tr:hover {
+    background-color: #f0fdf4;
+    transform: scale(1.01);
+}
+
+.table-modern tbody td {
+    padding: 18px;
+    border-bottom: 1px solid #f3f4f6;
+    vertical-align: middle;
+    color: var(--admin-dark-3);
+    font-weight: 500;
+}
+
+.table-modern tbody tr:last-child td {
+    border-bottom: none;
+}
+
+/* ============================================
+   BADGES & PILLS
+   ============================================ */
+
+.badge-veg,
+.badge-non-veg {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 7px 14px;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    transition: all 0.2s;
+}
+
+.badge-veg {
+    background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
+    color: #065f46;
+    border: 1px solid #10b981;
+}
+
+.badge-non-veg {
+    background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
+    color: #991b1b;
+    border: 1px solid #ef4444;
+}
+
+.badge-veg:hover,
+.badge-non-veg:hover {
+    transform: scale(1.08);
+    box-shadow: var(--shadow-sm);
+}
+
+/* Bootstrap Badge Enhancements */
+.badge {
+    padding: 6px 12px;
+    border-radius: 9999px;
+    font-weight: 600;
+    font-size: 0.75rem;
+    letter-spacing: 0.3px;
+}
+
+.badge.bg-success {
+    background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%) !important;
+}
+
+.badge.bg-warning {
+    background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%) !important;
+}
+
+.badge.bg-danger {
+    background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%) !important;
+}
+
+.badge.bg-info {
+    background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%) !important;
+}
+
+/* ============================================
+   TOGGLE SWITCHES
+   ============================================ */
+
+.toggle-switch {
+    display: inline-block;
+    width: 48px;
+    height: 26px;
+    background: #cbd5e1;
+    border-radius: 9999px;
+    position: relative;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.toggle-switch.on {
+    background: linear-gradient(135deg, var(--admin-primary), var(--admin-primary-dark));
+    box-shadow: 0 2px 8px rgba(16, 185, 129, 0.3);
+}
+
+.toggle-switch::after {
+    content: '';
+    position: absolute;
+    width: 22px;
+    height: 22px;
+    background: white;
+    border-radius: 50%;
+    top: 2px;
+    left: 2px;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.toggle-switch.on::after {
+    transform: translateX(22px);
+}
+
+/* ============================================
+   CHART CONTAINERS
+   ============================================ */
+
+.chart-container {
+    position: relative;
+    height: 320px;
+    width: 100%;
+    padding: 15px;
+}
+
+/* ============================================
+   ACTION BUTTONS
+   ============================================ */
+
+.btn-sm.btn-outline-primary,
+.btn-sm.btn-info,
+.btn-sm.btn-danger {
+    padding: 6px 14px;
+    font-size: 0.8rem;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: all 0.2s;
+}
+
+.btn-sm:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+/* ============================================
+   ANIMATIONS
+   ============================================ */
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.stat-card,
+.dashboard-widget {
+    animation: fadeInUp 0.5s ease-out;
+}
+
+.stat-card:nth-child(1) {
+    animation-delay: 0.1s;
+}
+
+.stat-card:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.stat-card:nth-child(3) {
+    animation-delay: 0.3s;
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+
+@media (max-width: 991px) {
+    .admin-sidebar {
+        transform: translateX(-100%);
+    }
+
+    .admin-main {
+        margin-left: 0;
+        padding: 20px;
+    }
+}
+
+@media (max-width: 767px) {
+    .stat-card .value {
+        font-size: 2rem;
+    }
+
+    .widget-title {
+        font-size: 1.1rem;
+    }
+}
+
+/* ============================================
+   UTILITY CLASSES
+   ============================================ */
+
+.text-gradient {
+    background: linear-gradient(135deg, var(--admin-primary), var(--admin-indigo));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.icon-box {
+    width: 56px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    font-size: 1.5rem;
+    margin-bottom: 12px;
+}
+
+.icon-box.primary {
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(16, 185, 129, 0.2));
+    color: var(--admin-primary);
+}
+
+.icon-box.secondary {
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(99, 102, 241, 0.2));
+    color: var(--admin-indigo);
+}

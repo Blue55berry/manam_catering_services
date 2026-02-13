@@ -1,0 +1,202 @@
+/* South Indian Menu Custom Styles */
+:root {
+    --dakshin-green: #174E2C;
+    --dakshin-gold: #cfa957;
+    --dakshin-bg: #f9f9f9;
+}
+
+.dakshin-menu-section {
+    background-color: #fff;
+    padding: 60px 0;
+    font-family: 'Inter', sans-serif;
+}
+
+.dakshin-menu-title {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.dakshin-menu-title h2 {
+    color: #222;
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.dakshin-menu-title p {
+    color: #777;
+    font-size: 1rem;
+}
+
+/* Toggle Switch */
+.dakshin-toggle-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 50px;
+}
+
+.dakshin-toggle-container {
+    background: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 50px;
+    display: flex;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    width: 600px;
+    max-width: 100%;
+}
+
+.dakshin-toggle-btn {
+    flex: 1;
+    border: none;
+    background: transparent;
+    padding: 15px 0;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #555;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.dakshin-toggle-btn.active {
+    background: linear-gradient(90deg, rgba(20, 110, 19, 1) 0%, rgba(87, 199, 133, 1) 57%, rgba(112, 156, 9, 1) 100%);
+    color: #fff;
+}
+
+.dakshin-toggle-btn i {
+    font-size: 1.2rem;
+}
+
+/* Menu Grid */
+.dakshin-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+/* Menu Card */
+.dakshin-card {
+    background: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+    border: 1px solid #f0f0f0;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.dakshin-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+}
+
+.card-image-wrapper {
+    position: relative;
+    padding: 15px;
+    text-align: center;
+}
+
+.card-img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.badge-pop {
+    position: absolute;
+    top: 25px;
+    right: 25px;
+    background: var(--dakshin-gold);
+    color: #000;
+    font-weight: 600;
+    font-size: 0.75rem;
+    padding: 4px 10px;
+    border-radius: 4px;
+    z-index: 2;
+}
+
+.card-content {
+    padding: 0 20px 25px;
+    flex-grow: 1;
+    text-align: left;
+}
+
+.card-header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 10px;
+}
+
+.card-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #333;
+    margin: 0;
+}
+
+.diet-icon {
+    font-size: 1.2rem;
+}
+
+.diet-icon.veg {
+    color: #2a8a4f;
+}
+
+.diet-icon.non-veg {
+    color: #bd2130;
+}
+
+.card-desc {
+    color: #777;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    margin-bottom: 15px;
+}
+
+.spice-level {
+    display: flex;
+    align-items: center;
+    font-size: 0.85rem;
+    color: #333;
+    font-weight: 600;
+}
+
+.spice-level i {
+    color: #e74c3c;
+    margin-left: 5px;
+}
+
+/* Inner Page Header Override - Standardized with global white theme */
+.dakshin-header-inner-page {
+    background-color: #ffffff !important;
+    position: relative !important;
+    padding: 15px 0 !important;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05) !important;
+}
+
+.dakshin-header-inner-page .dakshin-nav-link {
+    color: var(--dakshin-green) !important;
+}
+
+.dakshin-header-inner-page .dakshin-logo-wrapper img {
+    max-height: 70px;
+}
+
+/* Adjusted padding for standardized relative header */
+.dakshin-menu-section {
+    padding-top: 80px;
+}
+
+.modern {
+    margin: 40px;
+}
