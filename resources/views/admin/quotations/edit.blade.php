@@ -72,6 +72,21 @@
                     </div>
                 </div>
 
+                <div class="row mb-4">
+                    <div class="col-md-6">
+                        <label class="form-label fw-bold">Select Catering Package</label>
+                        <select class="form-select" id="packageSelect">
+                            <option value="">-- No Package / Custom Only --</option>
+                            @foreach($packages as $package)
+                                <option value="{{ $package->id }}" data-name="{{ $package->name }}" data-price="{{ $package->price }}">
+                                    {{ $package->name }} (₹{{ number_format($package->price, 2) }} per guest)
+                                </option>
+                            @endforeach
+                        </select>
+                        <div class="form-text">Selecting a package will add it as a line item. You can still add custom items below.</div>
+                    </div>
+                </div>
+
                 <hr class="my-4">
 
                 <h5 class="mb-3">Items</h5>
@@ -381,5 +396,59 @@ document.getElementById('taxInput').addEventListener('input', calculateTotal);
 document.getElementById('discountInput').addEventListener('input', calculateTotal);
 
 calculateTotal();
+// Package Selection Handler
+const packageSelect = document.getElementById('packageSelect');
+if(packageSelect) {
+    packageSelect.addEventListener('change', function() {
+        const selectedOption = this.options[this.selectedIndex];
+        if(!selectedOption.value) return;
+
+        const name = selectedOption.dataset.name;
+        const price = parseFloat(selectedOption.dataset.price) || 0;
+        const guests = parseInt(document.querySelector('input[name="guest_count"]').value) || 1;
+
+        // Add a new row for the package
+        const container = document.getElementById('itemsContainer');
+        const newRow = document.createElement('div');
+        newRow.className = 'row mb-2 item-row';
+        
+        newRow.innerHTML = `
+            <div class="col-md-3">
+                <input type="text" class="form-control" value="Catering Package" readonly>
+            </div>
+            <div class="col-md-4">
+                <input type="text" class="form-control item-select" name="items[${itemIndex}][name]" value="${name}" required>
+            </div>
+            <div class="col-md-2">
+                <input type="number" class="form-control item-quantity" name="items[${itemIndex}][quantity]" placeholder="Qty" min="1" value="${guests}" required>
+            </div>
+            <div class="col-md-2">
+                <input type="number" class="form-control item-price" name="items[${itemIndex}][price]" placeholder="Price" min="0" step="0.01" value="${price}" required>
+            </div>
+            <div class="col-md-1">
+                <button type="button" class="btn btn-danger btn-sm remove-item">
+                    <i class="fa fa-trash"></i>
+                </button>
+            </div>
+        `;
+        container.appendChild(newRow);
+        
+        // Attach remove listener and calculation handlers
+        newRow.querySelector('.remove-item').addEventListener('click', function() {
+            newRow.remove();
+            calculateTotal();
+        });
+        
+        newRow.querySelectorAll('input').forEach(input => {
+            input.addEventListener('input', calculateTotal);
+        });
+
+        itemIndex++;
+        calculateTotal();
+        
+        // Reset selection
+        this.value = '';
+    });
+}
 </script>
 @endsection

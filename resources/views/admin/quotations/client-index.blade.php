@@ -9,73 +9,132 @@
         <h2 class="section-title">
             <i class="fa fa-users"></i> Client Quotations
         </h2>
-        <a href="{{ route('admin.bookings.index') }}" class="btn-modern" style="background: #6b7280; color: white;">
+        <a href="{{ route('admin.bookings.index') }}" class="btn-modern shadow-sm" style="background: #6b7280; color: white;">
             <i class="fa fa-arrow-left"></i> Back to Bookings
         </a>
     </div>
 
-    <!-- Search Bar -->
-    <div class="modern-card mb-4">
-        <form action="{{ route('admin.client-quotations.index') }}" method="GET" class="row g-3">
-            <div class="col-md-10">
-                <div class="input-group">
-                    <span class="input-group-text"><i class="fa fa-search"></i></span>
-                    <input type="text" 
-                           name="search" 
-                           class="form-control" 
-                           placeholder="Search by quotation number, customer name, email, or event type..." 
-                           value="{{ request('search') }}">
-                </div>
-            </div>
-            <div class="col-md-2">
-                <button type="submit" class="btn-modern btn-modern-primary w-100">
-                    <i class="fa fa-search"></i> Search
-                </button>
-                @if(request('search'))
-                <a href="{{ route('admin.client-quotations.index') }}" class="btn-modern w-100 mt-2" style="background: #6b7280; color: white;">
-                    <i class="fa fa-times"></i> Clear
-                </a>
-                @endif
-            </div>
-        </form>
-    </div>
-
     @if(session('success'))
         <div class="alert alert-success alert-dismissible fade show" role="alert">
-            {{ session('success') }}
+            <i class="fa fa-check-circle me-2"></i>{{ session('success') }}
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
     @endif
 
     @if(session('error'))
         <div class="alert alert-danger alert-dismissible fade show" role="alert">
-            {{ session('error') }}
+            <i class="fa fa-exclamation-circle me-2"></i>{{ session('error') }}
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
     @endif
 
-    @if($quotations->count() > 0)
-        <div class="row g-4">
-            @foreach($quotations as $quotation)
-                <div class="col-lg-4 col-md-6">
-                    <div class="quotation-card modern-card">
-                        <div class="quotation-card-header">
-                            <div class="d-flex justify-content-between align-items-start">
-                                <div>
-                                    <h5 class="quotation-number mb-1">
-                                        #{{ $loop->iteration + ($quotations->currentPage() - 1) * $quotations->perPage() }}
-                                        <span class="text-muted fw-normal" style="font-size: 0.8rem;">({{ $quotation->quotation_number }})</span>
-                                    </h5>
-                                    <small class="text-muted">{{ $quotation->created_at->format('M d, Y') }}</small>
+    <div class="modern-card">
+        <div class="modern-card-header py-3 px-4 d-flex flex-wrap justify-content-between align-items-center gap-3">
+            <!-- Search -->
+            <div class="flex-grow-1" style="max-width: 400px;">
+                <form action="{{ route('admin.client-quotations.index') }}" method="GET">
+                    <div class="input-group">
+                        <span class="input-group-text bg-light border-end-0"><i class="fa fa-search text-muted"></i></span>
+                        <input type="text" 
+                               name="search" 
+                               class="form-control border-start-0 bg-light" 
+                               placeholder="Search quotations..." 
+                               value="{{ request('search') }}">
+                         @if(request('search') || request('status'))
+                            <a href="{{ route('admin.client-quotations.index') }}" class="btn btn-light border" title="Clear Filters">
+                                <i class="fa fa-times text-danger"></i>
+                            </a>
+                        @endif
+                    </div>
+                    <!-- Hidden input to maintain status filter when searching -->
+                    @if(request('status'))
+                        <input type="hidden" name="status" value="{{ request('status') }}">
+                    @endif
+                </form>
+            </div>
+
+            <!-- Status Filter Tabs (Visual) -->
+            <div class="status-filters">
+                <a href="{{ route('admin.client-quotations.index', array_merge(request()->except('status', 'page'), ['status' => 'all'])) }}" 
+                   class="filter-pill {{ !request('status') || request('status') == 'all' ? 'active' : '' }}">
+                   All
+                </a>
+                <a href="{{ route('admin.client-quotations.index', array_merge(request()->except('status', 'page'), ['status' => 'draft'])) }}" 
+                   class="filter-pill {{ request('status') == 'draft' ? 'active' : '' }}">
+                   Draft
+                </a>
+                <a href="{{ route('admin.client-quotations.index', array_merge(request()->except('status', 'page'), ['status' => 'sent'])) }}" 
+                   class="filter-pill {{ request('status') == 'sent' ? 'active' : '' }}">
+                   Sent
+                </a>
+                <a href="{{ route('admin.client-quotations.index', array_merge(request()->except('status', 'page'), ['status' => 'accepted'])) }}" 
+                   class="filter-pill {{ request('status') == 'accepted' ? 'active' : '' }}">
+                   Accepted
+                </a>
+                <a href="{{ route('admin.client-quotations.index', array_merge(request()->except('status', 'page'), ['status' => 'rejected'])) }}" 
+                   class="filter-pill {{ request('status') == 'rejected' ? 'active' : '' }}">
+                   Rejected
+                </a>
+            </div>
+        </div>
+
+        <div class="modern-card-body p-0">
+            @if($quotations->count() > 0)
+                <div class="table-responsive">
+                    <table class="modern-table">
+                        <thead>
+                            <tr>
+                                <th width="5%">S.No</th>
+                                <th width="10%">Date</th>
+                                <th width="12%">Quotation #</th>
+                                <th width="20%">Customer</th>
+                                <th width="15%">Event</th>
+                                <th width="10%" class="text-end">Amount</th>
+                                <th width="10%" class="text-center">Status</th>
+                                <th width="18%" class="text-end">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach($quotations as $quotation)
+                            <tr>
+                                <td>
+                                    <span class="text-muted fw-bold">{{ $loop->iteration + ($quotations->currentPage() - 1) * $quotations->perPage() }}</span>
+                                </td>
+                                <td>
+                                    <span class="text-muted small">
+                                        {{ $quotation->created_at->format('M d, Y') }}
+                                        <br>
+                                        {{ $quotation->created_at->format('h:i A') }}
+                                    </span>
+                                </td>
+                                <td>
+                                    <span class="fw-bold text-dark">{{ $quotation->quotation_number }}</span>
                                     @if($quotation->booking)
-                                        <div class="mt-1">
-                                            <span class="badge" style="background: #8B6F47; color: white; font-size: 0.75rem;">
-                                                <i class="fa fa-link"></i> Booking #{{ $quotation->booking->id }}
-                                            </span>
-                                        </div>
+                                        <br>
+                                        <small class="text-success"><i class="fa fa-link"></i> Book #{{ $quotation->booking->id }}</small>
                                     @endif
-                                </div>
-                                <div>
+                                </td>
+                                <td>
+                                    <div class="d-flex flex-column">
+                                        <span class="fw-bold text-dark">{{ $quotation->customer_name }}</span>
+                                        <small class="text-muted">{{ $quotation->customer_email }}</small>
+                                        @if($quotation->customer_phone)
+                                            <small class="text-muted">{{ $quotation->customer_phone }}</small>
+                                        @endif
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="d-flex flex-column">
+                                        <span>{{ $quotation->event_type ?? 'N/A' }}</span>
+                                        @if($quotation->event_date)
+                                            <small class="text-muted"><i class="fa fa-calendar-o me-1"></i>{{ $quotation->event_date->format('M d, Y') }}</small>
+                                        @endif
+                                    </div>
+                                </td>
+                                <td class="text-end">
+                                    <span class="fw-bold text-success">₹{{ number_format($quotation->total, 2) }}</span>
+                                </td>
+                                <td class="text-center">
                                     @if($quotation->status === 'sent')
                                         <span class="badge-modern badge-info">Sent</span>
                                     @elseif($quotation->status === 'accepted')
@@ -85,109 +144,75 @@
                                     @else
                                         <span class="badge-modern badge-secondary">Draft</span>
                                     @endif
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="quotation-card-body">
-                            <div class="customer-info mb-3">
-                                <i class="fa fa-user text-muted me-2"></i>
-                                <strong>{{ $quotation->customer_name }}</strong>
-                            </div>
-                            <div class="customer-info mb-3">
-                                <i class="fa fa-envelope text-muted me-2"></i>
-                                <small>{{ $quotation->customer_email }}</small>
-                            </div>
-                            
-                            @if($quotation->event_type)
-                            <div class="event-info mb-3">
-                                <div class="d-flex justify-content-between">
-                                    <span class="text-muted"><i class="fa fa-calendar me-1"></i> Event</span>
-                                    <strong>{{ $quotation->event_type }}</strong>
-                                </div>
-                                @if($quotation->event_date)
-                                <div class="d-flex justify-content-between mt-1">
-                                    <span class="text-muted"><i class="fa fa-clock me-1"></i> Date</span>
-                                    <span>{{ $quotation->event_date->format('M d, Y') }}</span>
-                                </div>
-                                @endif
-                                @if($quotation->guest_count)
-                                <div class="d-flex justify-content-between mt-1">
-                                    <span class="text-muted"><i class="fa fa-users me-1"></i> Guests</span>
-                                    <span>{{ $quotation->guest_count }}</span>
-                                </div>
-                                @endif
-                            </div>
-                            @endif
-
-                            <div class="quotation-total">
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <span class="text-muted">Total Amount</span>
-                                    <h4 class="mb-0 text-success">₹{{ number_format($quotation->total, 2) }}</h4>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="quotation-card-footer">
-                            <div class="row g-2">
-                                <div class="col-3">
-                                    <a href="{{ route('admin.quotations.show', $quotation) }}" 
-                                       class="btn-modern btn-modern-primary btn-sm w-100" title="View">
-                                        <i class="fa fa-eye"></i>
-                                    </a>
-                                </div>
-                                <div class="col-3">
-                                    <a href="{{ route('admin.quotations.edit', $quotation) }}" 
-                                       class="btn-modern btn-sm w-100" 
-                                       style="background: #f59e0b; color: white;" title="Edit">
-                                        <i class="fa fa-edit"></i>
-                                    </a>
-                                </div>
-                                <div class="col-3">
-                                    <button type="button" 
-                                            class="btn-modern btn-sm w-100" 
-                                            style="background: #3b82f6; color: white;" 
-                                            onclick="openEmailModal('{{ route('admin.quotations.email', $quotation) }}', '{{ $quotation->customer_email }}')"
-                                            title="Email">
-                                        <i class="fa fa-envelope"></i>
-                                    </button>
-                                </div>
-                                <div class="col-3">
-                                    <form action="{{ route('admin.quotations.destroy', $quotation) }}" 
-                                          method="POST" class="m-0">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" 
-                                                class="btn-modern btn-sm w-100" 
-                                                style="background: #ef4444; color: white;"
-                                                onclick="return confirm('Are you sure you want to delete this quotation?')" 
-                                                title="Delete">
-                                            <i class="fa fa-trash"></i>
+                                </td>
+                                <td class="text-end">
+                                    <div class="d-flex justify-content-end gap-2">
+                                        <a href="{{ route('admin.quotations.show', $quotation) }}" 
+                                           class="btn-icon btn-icon-primary" 
+                                           title="View Details">
+                                            <i class="fa fa-eye"></i>
+                                        </a>
+                                        <a href="{{ route('admin.quotations.edit', $quotation) }}" 
+                                           class="btn-icon btn-icon-warning" 
+                                           title="Edit">
+                                            <i class="fa fa-edit"></i>
+                                        </a>
+                                        <button type="button" 
+                                                class="btn-icon btn-icon-info" 
+                                                onclick="openEmailModal('{{ route('admin.quotations.email', $quotation) }}', '{{ $quotation->customer_email }}')"
+                                                title="Send Email">
+                                            <i class="fa fa-envelope"></i>
                                         </button>
-                                    </form>
-                                </div>
-                            </div>
+                                        <form action="{{ route('admin.quotations.destroy', $quotation) }}" method="POST" class="d-inline">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" 
+                                                    class="btn-icon btn-icon-danger" 
+                                                    onclick="return confirm('Delete {{ $quotation->quotation_number }}?')" 
+                                                    title="Delete">
+                                                <i class="fa fa-trash"></i>
+                                            </button>
+                                        </form>
+                                    </div>
+                                </td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            @else
+                <div class="text-center py-5">
+                    <div class="mb-3">
+                        <div class="d-inline-flex align-items-center justify-content-center rounded-circle bg-light" style="width: 80px; height: 80px;">
+                            <i class="fa fa-users fa-2x text-muted"></i>
                         </div>
                     </div>
+                    <h4 class="text-muted">No Client Quotations Found</h4>
+                    <p class="text-muted mb-4" style="max-width: 400px; margin: 0 auto;">
+                        Client quotations created from bookings will appear here. 
+                        @if(request('search') || request('status'))
+                        <br>Try adjusting your search or filters.
+                        @endif
+                    </p>
+                    @if(request('search') || request('status'))
+                        <a href="{{ route('admin.client-quotations.index') }}" class="btn-modern btn-modern-primary mt-3">
+                            <i class="fa fa-refresh"></i> Clear Filters
+                        </a>
+                    @else
+                        <a href="{{ route('admin.bookings.index') }}" class="btn-modern btn-modern-primary mt-3">
+                            <i class="fa fa-calendar-check-o"></i> Go to Bookings
+                        </a>
+                    @endif
                 </div>
-            @endforeach
+            @endif
         </div>
-
+        
         @if($quotations->hasPages())
-            <div class="mt-4">
-                {{ $quotations->links() }}
-            </div>
-        @endif
-    @else
-        <div class="modern-card text-center py-5">
-            <i class="fa fa-users" style="font-size: 4rem; color: #d1d5db; margin-bottom: 1rem;"></i>
-            <h4 class="text-muted mb-3">No Client Quotations Found</h4>
-            <p class="text-muted mb-4">Client quotations are automatically created when you generate quotations from event bookings.</p>
-            <a href="{{ route('admin.bookings.index') }}" class="btn-modern btn-modern-primary">
-                <i class="fa fa-calendar-check-o"></i> View Event Bookings
-            </a>
+        <div class="modern-card-footer">
+            {{ $quotations->links() }}
         </div>
-    @endif
+        @endif
+    </div>
 </div>
 
 <!-- Email Modal -->
@@ -229,52 +254,74 @@ function openEmailModal(actionUrl, email) {
 </script>
 
 <style>
-.quotation-card {
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-    height: 100%;
+/* Filter Pills */
+.status-filters {
     display: flex;
-    flex-direction: column;
+    gap: 0.5rem;
+    flex-wrap: wrap;
 }
 
-.quotation-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 25px rgba(0,0,0,0.1) !important;
+.filter-pill {
+    padding: 0.4rem 1rem;
+    border-radius: 50px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    text-decoration: none;
+    color: #6b7280;
+    background-color: #f3f4f6;
+    transition: all 0.2s;
+    border: 1px solid transparent;
 }
 
-.quotation-card-header {
-    padding: 1.25rem;
-    border-bottom: 1px solid #e5e7eb;
+.filter-pill:hover {
+    background-color: #e5e7eb;
+    color: #374151;
 }
 
-.quotation-number {
-    font-size: 1.1rem;
-    font-weight: 700;
-    color: #1B4D3E;
+.filter-pill.active {
+    background-color: #1B4D3E; /* Primary Color */
+    color: white;
+    box-shadow: 0 2px 4px rgba(27, 77, 62, 0.2);
 }
 
-.quotation-card-body {
-    padding: 1.25rem;
-    flex-grow: 1;
+/* Action Buttons */
+.btn-icon {
+    width: 32px;
+    height: 32px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+    border: none;
+    background: #f3f4f6;
+    color: #6b7280;
+    transition: all 0.2s;
+    text-decoration: none;
 }
 
-.customer-info, .event-info {
-    font-size: 0.9rem;
+.btn-icon:hover {
+    color: white;
+    transform: translateY(-2px);
 }
 
-.quotation-total {
-    padding-top: 1rem;
-    border-top: 2px dashed #e5e7eb;
-    margin-top: 1rem;
+.btn-icon-primary:hover { background: #1B4D3E; }
+.btn-icon-warning:hover { background: #f59e0b; }
+.btn-icon-info:hover { background: #3b82f6; }
+.btn-icon-danger:hover { background: #ef4444; }
+
+/* Table Alignments */
+.modern-table th {
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 0.05em;
+    background: #f9fafb;
+    padding: 1rem;
 }
 
-.quotation-card-footer {
-    padding: 1rem 1.25rem;
-    background-color: #f9fafb;
-    border-top: 1px solid #e5e7eb;
-}
-
-.badge-info {
-    background-color: #3b82f6;
+.modern-table td {
+    padding: 1rem;
+    vertical-align: middle;
 }
 </style>
 @endsection

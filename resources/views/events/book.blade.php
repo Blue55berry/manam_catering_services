@@ -96,6 +96,16 @@
                             <!-- Royal Form Area -->
                             <div class="col-lg-8">
                                 <div class="booking-royal-form-area">
+                                    @if($errors->any())
+                                        <div class="alert alert-danger mx-4 mt-4 mb-0">
+                                            <ul class="mb-0">
+                                                @foreach($errors->all() as $error)
+                                                    <li>{{ $error }}</li>
+                                                @endforeach
+                                            </ul>
+                                        </div>
+                                    @endif
+                                    
                                     <div class="booking-royal-header">
                                         <h2>Royal Reservation</h2>
                                         <p>Curating exceptional flavors for your most precious moments.</p>
@@ -154,9 +164,9 @@
                                         <div class="form-step" id="step2" style="display: none;">
                                             <div class="row">
                                                 <div class="col-md-12 royal-form-group">
-                                                    <label for="event_type" class="royal-form-label">Nature of Celebration <span class="text-danger">*</span></label>
+                                                    <label for="event_type" class="royal-form-label">CUISINE / CULTURAL PREFERENCE <span class="text-danger">*</span></label>
                                                     <select class="form-select royal-form-control royal-form-select @error('event_type') is-invalid @enderror" id="event_type" name="event_type" required>
-                                                        <option value="">Select Event Type</option>
+                                                        <option value="">Select service style...</option>
                                                         <option value="Wedding">Traditional Wedding</option>
                                                         <option value="Corporate Event">Royal Corporate Gathering</option>
                                                         <option value="Celebration">Premier Celebration</option>
@@ -165,12 +175,12 @@
                                                 </div>
                                                 
                                                 <div class="col-md-6 royal-form-group">
-                                                    <label for="event_date" class="royal-form-label">Date of Occasion <span class="text-danger">*</span></label>
+                                                    <label for="event_date" class="royal-form-label">DATE OF OCCASION <span class="text-danger">*</span></label>
                                                     <input type="date" class="form-control royal-form-control @error('event_date') is-invalid @enderror" id="event_date" name="event_date" value="{{ old('event_date') }}" required min="{{ date('Y-m-d', strtotime('+1 day')) }}">
                                                 </div>
                                                 
                                                 <div class="col-md-6 royal-form-group">
-                                                    <label for="guest_count" class="royal-form-label">Expected Attendees <span class="text-danger">*</span></label>
+                                                    <label for="guest_count" class="royal-form-label">EXPECTED ATTENDEES <span class="text-danger">*</span></label>
                                                     <input type="number" class="form-control royal-form-control @error('guest_count') is-invalid @enderror" id="guest_count" name="guest_count" value="{{ old('guest_count') }}" min="1" max="10000" placeholder="Number of guests" required>
                                                 </div>
                                                 
@@ -187,22 +197,56 @@
                                                 
                                                 <!-- Food Selection (Integrated in Step 2) -->
                                                 <div class="col-md-12 royal-form-group mt-3">
-                                                    <label class="royal-form-label">Select Preferred Dishes</label>
-                                                    <div class="food-selection-container p-3 border rounded bg-light" style="max-height: 400px; overflow-y: auto;">
-                                                        @foreach($categories as $category)
-                                                            <div class="category-block mb-3">
-                                                                <h6 class="category-title" style="font-size: 0.9rem; text-transform: uppercase;">{{ $category->name }}</h6>
-                                                                <div class="food-items-grid">
-                                                                    @foreach($category->activeMenuItems as $item)
-                                                                        <div class="food-item-pill @if(is_array(old('selected_items')) && in_array($item->name, old('selected_items'))) selected @endif" data-item-name="{{ $item->name }}">
-                                                                            <span>{{ $item->name }}</span>
-                                                                            <input type="checkbox" name="selected_items[]" value="{{ $item->name }}" style="display:none" @if(is_array(old('selected_items')) && in_array($item->name, old('selected_items'))) checked @endif>
-                                                                            <i class="fa fa-plus ms-2"></i>
+                                                    <label class="royal-form-label">Select Catering Package <span class="text-danger">*</span></label>
+                                                    <input type="hidden" name="package_id" id="selectedPackageId" required>
+                                                    <input type="hidden" name="food_preference" id="selectedFoodPreference" required>
+                                                    
+                                                    <div class="package-grid-container">
+                                                        <div class="row g-3">
+                                                            @foreach($packages as $package)
+                                                                <div class="col-md-6 col-lg-6">
+                                                                    <div class="package-card h-100" data-package-id="{{ $package->id }}" data-package-index="{{ $loop->index }}">
+                                                                        <div class="package-header">
+                                                                            <div class="d-flex justify-content-between align-items-start">
+                                                                                <div>
+                                                                                    <h5 class="package-title mb-1">{{ $package->name }}</h5>
+                                                                                    @if($package->type === 'Veg')
+                                                                                        <span class="badge bg-success">Vegetarian</span>
+                                                                                    @elseif($package->type === 'Non-Veg')
+                                                                                        <span class="badge bg-danger">Non-Veg</span>
+                                                                                    @else
+                                                                                        <span class="badge bg-warning text-dark">Mixed</span>
+                                                                                    @endif
+                                                                                </div>
+                                                                                <div class="package-price text-end">
+                                                                                    <span class="amount">₹{{ number_format($package->price, 0) }}</span>
+                                                                                    <small class="d-block text-muted">per guest</small>
+                                                                                </div>
+                                                                            </div>
                                                                         </div>
-                                                                    @endforeach
+                                                                        <div class="package-body">
+                                                                            <p class="small text-muted mb-3">{{ $package->description }}</p>
+                                                                            @if(!empty($package->features))
+                                                                                <ul class="package-features list-unstyled small mb-3">
+                                                                                    @foreach(array_slice($package->features, 0, 4) as $feature)
+                                                                                        <li class="mb-1"><i class="fa fa-check-circle text-success me-2"></i>{{ $feature }}</li>
+                                                                                    @endforeach
+                                                                                </ul>
+                                                                            @endif
+                                                                        </div>
+                                                                        <div class="package-footer mt-auto pt-3 border-top d-flex justify-content-between">
+                                                                            <button type="button" class="btn btn-sm btn-outline-primary view-package-details" data-package-index="{{ $loop->index }}">
+                                                                                <i class="fa fa-eye"></i> View Menu
+                                                                            </button>
+                                                                            <button type="button" class="btn btn-sm btn-primary select-package-btn">
+                                                                                Select
+                                                                            </button>
+                                                                        </div>
+                                                                    </div>
                                                                 </div>
-                                                            </div>
-                                                        @endforeach
+                                                            @endforeach
+                                                        </div>
+                                                        <div id="packageError" class="text-danger small mt-2" style="display:none;">Please select a package</div>
                                                     </div>
                                                 </div>
 
@@ -232,24 +276,209 @@
     </div>
 </div>
 
+<!-- Premium Package Modal -->
+<div class="modal fade modal-premium" id="packageModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header d-flex flex-column align-items-center text-center">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <span class="modal-premium-label mb-2">SELECTED PACKAGE</span>
+                <div class="modal-premium-icon mb-3">
+                    <i class="fa fa-trophy"></i>
+                </div>
+                <h2 class="modal-premium-title" id="modalPackageName">Package Name</h2>
+            </div>
+            
+            <div class="modal-premium-body">
+                <div class="modal-premium-quote">
+                    "An elevated dining experience featuring a curated selection of gourmet delicacies."
+                </div>
+                
+                <div class="modal-menu-grid" id="modalPackageMenu">
+                    <!-- Dynamic Menu Content -->
+                </div>
+            </div>
+            
+            <div class="modal-premium-footer">
+                <button type="button" class="btn btn-outline-secondary px-4 py-2 rounded-pill" data-bs-dismiss="modal">CLOSE</button>
+                <button type="button" class="btn btn-success px-4 py-2 rounded-pill" id="modalSelectBtn" style="background-color: var(--royal-green); border: none;">
+                    <i class="fa fa-check-circle me-2"></i> SELECT THIS PACKAGE
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Pass packages data to JS
+    const packagesData = @json($packages);
+</script>
+
 <!-- JS specifically for the new UI interactions -->
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-    const prefCards = document.querySelectorAll('.royal-pref-card');
-    prefCards.forEach(card => {
-        card.addEventListener('click', function() {
-            const radioId = this.getAttribute('data-input-id');
-            const radio = document.getElementById(radioId);
-            if (radio) {
-                radio.checked = true;
-                prefCards.forEach(c => c.classList.remove('selected'));
-                this.classList.add('selected');
+    const packageCards = document.querySelectorAll('.package-card');
+    const packageInput = document.getElementById('selectedPackageId');
+    const foodPreferenceInput = document.getElementById('selectedFoodPreference');
+    const packageModal = new bootstrap.Modal(document.getElementById('packageModal'));
+    
+    // Select Package Logic
+    function selectPackage(id) {
+        // Update Inputs
+        packageInput.value = id;
+        
+        // Find package data to set food preference
+        const pkg = packagesData.find(p => p.id == id);
+        if(pkg) {
+            foodPreferenceInput.value = pkg.type;
+        }
+        
+        // Update UI
+        packageCards.forEach(card => {
+            if(card.dataset.packageId == id) {
+                card.classList.add('selected', 'border-primary', 'bg-light');
+                const btn = card.querySelector('.select-package-btn');
+                btn.textContent = 'Selected';
+                btn.classList.replace('btn-primary', 'btn-success');
+            } else {
+                card.classList.remove('selected', 'border-primary', 'bg-light');
+                const btn = card.querySelector('.select-package-btn');
+                btn.textContent = 'Select';
+                btn.classList.replace('btn-success', 'btn-primary');
             }
         });
+        
+        // Hide error if visible
+        const packageError = document.getElementById('packageError');
+        if(packageError) packageError.style.display = 'none';
+        
+        // Close modal if open
+        // packageModal.hide(); // Allow user to verify selection in modal
+    }
+
+    // Card Click Event (Delegated)
+    packageCards.forEach(card => {
+        const selectBtn = card.querySelector('.select-package-btn');
+        const viewBtn = card.querySelector('.view-package-details');
+        
+        if(selectBtn) {
+            selectBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                selectPackage(card.dataset.packageId);
+            });
+        }
+        
+        if(viewBtn) {
+            viewBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                openPackageModal(card.dataset.packageIndex);
+            });
+        }
+
+        // Make whole card clickable
+        card.addEventListener('click', function(e) {
+             if(!e.target.closest('button')) {
+                 selectPackage(this.dataset.packageId);
+             }
+        });
     });
+
+    // Modal Logic
+    function openPackageModal(index) {
+        const pkg = packagesData[index];
+        if(!pkg) return;
+
+        document.getElementById('modalPackageName').textContent = pkg.name;
+        
+        // Helper to get icons based on category name
+        const getCategoryIcon = (categoryName) => {
+            const lowerCat = categoryName.toLowerCase();
+            if (lowerCat.includes('starter') || lowerCat.includes('appetizer')) return 'fa-cutlery';
+            if (lowerCat.includes('main') || lowerCat.includes('rice') || lowerCat.includes('bread')) return 'fa-fire';
+            if (lowerCat.includes('dessert') || lowerCat.includes('sweet')) return 'fa-birthday-cake';
+            if (lowerCat.includes('beverage') || lowerCat.includes('drink')) return 'fa-glass';
+            if (lowerCat.includes('salad')) return 'fa-leaf';
+            if (lowerCat.includes('soup')) return 'fa-spoon';
+            return 'fa-circle-o';
+        };
+
+        // Menu Content
+        const menuContainer = document.getElementById('modalPackageMenu');
+        menuContainer.innerHTML = '';
+        
+        if(pkg.menu_content && pkg.menu_content.length > 0) {
+            pkg.menu_content.forEach(cat => {
+                const iconClass = getCategoryIcon(cat.category);
+                
+                let itemsHtml = '<ul class="modal-menu-list">';
+                if(cat.items) {
+                    cat.items.forEach(item => {
+                        itemsHtml += `<li class="modal-menu-item">${item}</li>`;
+                    });
+                }
+                itemsHtml += '</ul>';
+                
+                menuContainer.innerHTML += `
+                    <div class="modal-menu-category">
+                        <div class="modal-menu-cat-header">
+                            <i class="fa ${iconClass} modal-menu-cat-icon"></i>
+                            <h5 class="modal-menu-cat-title">${cat.category}</h5>
+                        </div>
+                        ${itemsHtml}
+                    </div>
+                `;
+            });
+        } else {
+             menuContainer.innerHTML = '<p class="text-muted text-center w-100 fst-italic">Menu composition details available upon request.</p>';
+        }
+
+        // Select Button in Modal
+        const modalBtn = document.getElementById('modalSelectBtn');
+        // Remove old listeners to prevent multiple firings if re-opened
+        const newBtn = modalBtn.cloneNode(true);
+        modalBtn.parentNode.replaceChild(newBtn, modalBtn);
+        
+        newBtn.onclick = function() {
+            selectPackage(pkg.id);
+            packageModal.hide();
+        };
+
+        packageModal.show();
+    }
 });
 </script>
 
+<style>
+/* Package Card Styles specifically for this page */
+.package-card {
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 1.5rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background: #fff;
+}
+.package-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+    border-color: var(--royal-gold);
+}
+.package-card.selected {
+    border: 2px solid var(--royal-gold);
+    background-color: #fdfbf7;
+}
+.package-title {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+}
+.amount {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--royal-gold);
+}
+</style>
 
 <script src="{{ asset('assets/js/booking-page.js') }}"></script>
 @endsection

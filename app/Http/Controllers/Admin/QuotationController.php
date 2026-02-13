@@ -32,24 +32,42 @@ class QuotationController extends Controller
             });
         }
 
+        // Filter by Status
+        if ($request->has('status') && $request->status != 'all' && $request->status != '') {
+            $query->where('status', $request->status);
+        }
+
         $quotations = $query->orderBy('created_at', 'desc')->paginate(15);
         return view('admin.quotations.client-index', compact('quotations'));
     }
 
-    // Manual Quotations
+    // Unified Quotations Index (Manual + Client)
     public function index(Request $request)
     {
-        $query = Quotation::manualQuotations();
+        $query = Quotation::with('booking');
+
+        // Filter by Source (Client vs Admin)
+        if ($request->has('source') && $request->source != 'all' && $request->source != '') {
+            if ($request->source == 'client') {
+                $query->whereNotNull('booking_id');
+            } elseif ($request->source == 'admin') {
+                $query->whereNull('booking_id');
+            }
+        }
+
+        // Filter by Status
+        if ($request->has('status') && $request->status != 'all' && $request->status != '') {
+            $query->where('status', $request->status);
+        }
 
         // Search functionality
         if ($request->has('search') && $request->search != '') {
             $search = $request->search;
             $query->where(function ($q) use ($search) {
-                $q
-                    ->where('quotation_number', 'LIKE', '%' . $search . '%')
-                    ->orWhere('customer_name', 'LIKE', '%' . $search . '%')
-                    ->orWhere('customer_email', 'LIKE', '%' . $search . '%')
-                    ->orWhere('event_type', 'LIKE', '%' . $search . '%');
+                $q->where('quotation_number', 'LIKE', '%' . $search . '%')
+                  ->orWhere('customer_name', 'LIKE', '%' . $search . '%')
+                  ->orWhere('customer_email', 'LIKE', '%' . $search . '%')
+                  ->orWhere('event_type', 'LIKE', '%' . $search . '%');
             });
         }
 
@@ -70,13 +88,15 @@ class QuotationController extends Controller
             $customer = \App\Models\Customer::find($request->customer_id);
         }
 
+        $customers = \App\Models\Customer::orderBy('name')->get();
         $categories = \App\Models\MenuCategory::with(['items' => function ($q) {
             $q->where('is_active', true);
         }])->where('is_active', true)->orderBy('order')->get();
 
         $events = \App\Models\Event::where('is_active', true)->orderBy('order')->get();
+        $packages = \App\Models\Package::where('is_active', true)->orderBy('name')->get();
 
-        return view('admin.quotations.create', compact('booking', 'customer', 'categories', 'events'));
+        return view('admin.quotations.create', compact('booking', 'customer', 'categories', 'events', 'customers', 'packages'));
     }
 
     public function store(Request $request)
@@ -121,8 +141,9 @@ class QuotationController extends Controller
         }])->where('is_active', true)->orderBy('order')->get();
 
         $events = \App\Models\Event::where('is_active', true)->orderBy('order')->get();
+        $packages = \App\Models\Package::where('is_active', true)->orderBy('name')->get();
 
-        return view('admin.quotations.edit', compact('quotation', 'categories', 'events'));
+        return view('admin.quotations.edit', compact('quotation', 'categories', 'events', 'packages'));
     }
 
     public function update(Request $request, Quotation $quotation)

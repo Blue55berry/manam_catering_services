@@ -22,8 +22,8 @@
         <aside class="admin-sidebar" id="adminSidebar">
             <!-- Sidebar Header -->
             <div class="sidebar-header">
-                <div class="sidebar-logo">
-                    <i class="fa fa-cutlery"></i>
+                <div class="sidebar-logo" style="width: auto; height: auto; background: transparent;">
+                     <img src="{{ asset('assets/images/main/logo.png') }}" alt="Manam Logo" style="max-width: 60px; height: 60px;" class="rounded-circle object-fit-cover">
                 </div>
                 <div class="sidebar-brand">
                     <h3>Manam</h3>
@@ -47,6 +47,12 @@
                         <a href="{{ route('admin.menu-items.index') }}" class="{{ request()->routeIs('admin.menu-items.*') ? 'active' : '' }}">
                             <i class="fa fa-cutlery"></i>
                             <span>Menu Management</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('admin.packages.index') }}" class="{{ request()->routeIs('admin.packages.*') ? 'active' : '' }}">
+                            <i class="fa fa-gift"></i>
+                            <span>Packages</span>
                         </a>
                     </li>
 
@@ -81,17 +87,25 @@
                             <span>Blog Management</span>
                         </a>
                     </li>
-                    <li>
-                        <a href="{{ route('admin.client-quotations.index') }}" class="{{ request()->routeIs('admin.client-quotations.*') ? 'active' : '' }}">
-                            <i class="fa fa-users"></i>
-                            <span>Client Quotations</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{{ route('admin.quotations.index') }}" class="{{ request()->routeIs('admin.quotations.*') ? 'active' : '' }}">
+                    <!-- Quotations Dropdown -->
+                    <li class="has-submenu {{ request()->routeIs('admin.quotations.*') || request()->routeIs('admin.client-quotations.index') ? 'open' : '' }}">
+                        <a href="#" class="submenu-toggle {{ request()->routeIs('admin.quotations.*') || request()->routeIs('admin.client-quotations.index') ? 'active' : '' }}">
                             <i class="fa fa-file-text-o"></i>
-                            <span>Create Quotations</span>
+                            <span>Quotations</span>
+                            <i class="fa fa-angle-down submenu-arrow"></i>
                         </a>
+                        <ul class="submenu">
+                            <li>
+                                <a href="{{ route('admin.quotations.index') }}" class="{{ request()->routeIs('admin.quotations.index') ? 'active' : '' }}">
+                                    <i class="fa fa-list"></i> All Quotations
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('admin.quotations.create') }}" class="{{ request()->routeIs('admin.quotations.create') ? 'active' : '' }}">
+                                    <i class="fa fa-plus"></i> Create New Quotation
+                                </a>
+                            </li>
+                        </ul>
                     </li>
                     
                     <!-- Customers Dropdown -->

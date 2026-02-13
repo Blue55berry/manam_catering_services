@@ -11,14 +11,14 @@
     <div class="stat-card green">
         <div class="stat-card-header">
             <div>
-                <div class="stat-label">Total Orders</div>
-                <div class="stat-value">0</div>
+                <div class="stat-label">Total Bookings</div>
+                <div class="stat-value">{{ $stats['total_bookings'] }}</div>
                 <div class="stat-change positive">
-                    <i class="fa fa-arrow-up"></i> Live tracking
+                    <i class="fa fa-arrow-up"></i> {{ $stats['pending_bookings'] }} Pending
                 </div>
             </div>
             <div class="stat-icon">
-                <i class="fa fa-shopping-cart"></i>
+                <i class="fa fa-calendar-check-o"></i>
             </div>
         </div>
     </div>
@@ -27,7 +27,7 @@
         <div class="stat-card-header">
             <div>
                 <div class="stat-label">Revenue</div>
-                <div class="stat-value">₹0</div>
+                <div class="stat-value">₹{{ number_format($stats['revenue'], 2) }}</div>
                 <div class="stat-change positive">
                     <i class="fa fa-arrow-up"></i> All time
                 </div>
@@ -85,6 +85,110 @@
             </div>
         </div>
 
+        <!-- Recent Bookings -->
+        <div class="modern-card mb-4">
+            <div class="modern-card-header">
+                <h3 class="modern-card-title">
+                    <i class="fa fa-calendar-check-o"></i> Recent Event Bookings
+                </h3>
+                <a href="{{ route('admin.bookings.index') }}" class="btn-modern btn-modern-primary btn-sm">
+                    View All <i class="fa fa-arrow-right"></i>
+                </a>
+            </div>
+            <div class="modern-card-body">
+                @if($recentBookings->count() > 0)
+                    <table class="modern-table">
+                        <thead>
+                            <tr>
+                                <th>Customer</th>
+                                <th>Event Type</th>
+                                <th>Event Date</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach($recentBookings as $booking)
+                            <tr>
+                                <td>
+                                    <strong>{{ $booking->name }}</strong><br>
+                                    <small class="text-muted">{{ $booking->email }}</small>
+                                </td>
+                                <td>
+                                    <strong>{{ $booking->package->name ?? 'Custom' }}</strong><br>
+                                    <span class="badge bg-info text-white">{{ $booking->event_type }}</span>
+                                </td>
+                                <td>{{ $booking->event_date->format('M d, Y') }}</td>
+                                <td>
+                                    @if($booking->status === 'pending')
+                                        <span class="badge bg-warning">Pending</span>
+                                    @elseif($booking->status === 'confirmed')
+                                        <span class="badge bg-success">Confirmed</span>
+                                    @else
+                                        <span class="badge bg-danger">Cancelled</span>
+                                    @endif
+                                </td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                @else
+                    <div class="text-center py-5">
+                        <i class="fa fa-calendar-o fa-3x text-muted mb-3"></i>
+                        <p class="text-muted">No bookings yet</p>
+                    </div>
+                @endif
+            </div>
+        </div>
+
+        <!-- Recent Client Quotations -->
+        <div class="modern-card mb-4">
+            <div class="modern-card-header">
+                <h3 class="modern-card-title">
+                    <i class="fa fa-file-text-o"></i> Recent Client Quotations
+                </h3>
+                <a href="{{ route('admin.client-quotations.index') }}" class="btn-modern btn-modern-primary btn-sm">
+                    View All <i class="fa fa-arrow-right"></i>
+                </a>
+            </div>
+            <div class="modern-card-body">
+                @php
+                    $recentQuotations = \App\Models\Quotation::clientQuotations()->orderBy('created_at', 'desc')->limit(5)->get();
+                @endphp
+                
+                @if($recentQuotations->count() > 0)
+                    <table class="modern-table">
+                        <thead>
+                            <tr>
+                                <th>Quotation</th>
+                                <th>Customer</th>
+                                <th>Amount</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach($recentQuotations as $quotation)
+                            <tr>
+                                <td><strong>{{ $quotation->quotation_number }}</strong></td>
+                                <td>{{ $quotation->customer_name }}</td>
+                                <td class="text-success fw-bold">₹{{ number_format($quotation->total, 2) }}</td>
+                                <td>
+                                    <span class="badge {{ $quotation->status === 'draft' ? 'bg-secondary' : ($quotation->status === 'sent' ? 'bg-info' : 'bg-success') }}">
+                                        {{ ucfirst($quotation->status) }}
+                                    </span>
+                                </td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                @else
+                    <div class="text-center py-5">
+                        <i class="fa fa-file-o fa-3x text-muted mb-3"></i>
+                        <p class="text-muted">No quotations yet</p>
+                    </div>
+                @endif
+            </div>
+        </div>
+
         <!-- Recent Enquiries -->
         <div class="modern-card">
             <div class="modern-card-header">
@@ -96,17 +200,11 @@
                 </a>
             </div>
             <div class="modern-card-body">
-                @php
-                    $recentContacts = \App\Models\Contact::orderBy('created_at', 'desc')->limit(5)->get();
-                @endphp
-                
                 @if($recentContacts->count() > 0)
                     <table class="modern-table">
                         <thead>
                             <tr>
                                 <th>Name</th>
-                                <th>Email</th>
-                                <th>Phone</th>
                                 <th>Date</th>
                                 <th>Status</th>
                             </tr>
@@ -115,18 +213,12 @@
                             @foreach($recentContacts as $contact)
                             <tr>
                                 <td><strong>{{ $contact->name }}</strong></td>
-                                <td>{{ $contact->email }}</td>
-                                <td>{{ $contact->phone }}</td>
                                 <td>{{ $contact->created_at->format('M d, Y') }}</td>
                                 <td>
                                     @if($contact->is_read)
-                                        <span class="badge-modern badge-success">
-                                            <i class="fa fa-check"></i> Read
-                                        </span>
+                                        <span class="badge-modern badge-success">Read</span>
                                     @else
-                                        <span class="badge-modern badge-warning">
-                                            <i class="fa fa-eye-slash"></i> New
-                                        </span>
+                                        <span class="badge-modern badge-warning">New</span>
                                     @endif
                                 </td>
                             </tr>

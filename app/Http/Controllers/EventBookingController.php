@@ -18,7 +18,8 @@ class EventBookingController extends Controller
     {
         $event = $eventId ? Event::find($eventId) : null;
         $categories = MenuCategory::active()->ordered()->with(['activeMenuItems'])->get();
-        return view('events.book', compact('event', 'categories'));
+        $packages = \App\Models\Package::where('is_active', true)->orderBy('price')->get();
+        return view('events.book', compact('event', 'categories', 'packages'));
     }
 
     /**
@@ -37,15 +38,11 @@ class EventBookingController extends Controller
             'event_type' => 'required|string|in:Wedding,Corporate Event,Celebration,Social Gathering',
             'event_date' => 'required|date|after:today',
             'guest_count' => 'required|integer|min:1|max:10000',
-            'food_preference' => 'required|string|in:Vegetarian',
-            'dish_suggestions' => 'nullable|string|max:1000',
+            'package_id' => 'required|exists:packages,id', // Added
+            'food_preference' => 'required|string|max:50',
+            'selected_items' => 'nullable|string',
             'special_requests' => 'nullable|string|max:1000',
-            'selected_items' => 'nullable|array',
         ]);
-
-        if (isset($validated['selected_items'])) {
-            $validated['selected_items'] = implode(', ', $validated['selected_items']);
-        }
 
         $validated['status'] = 'pending';
 
@@ -75,10 +72,10 @@ class EventBookingController extends Controller
             'event_type' => 'required|string|in:Wedding,Corporate Event,Celebration,Social Gathering',
             'event_date' => 'required|date|after:today',
             'guest_count' => 'required|integer|min:1|max:10000',
-            'food_preference' => 'required|string|in:Vegetarian',
-            'dish_suggestions' => 'nullable|string|max:1000',
+            'package_id' => 'required|exists:packages,id', // Added
+            'food_preference' => 'required|string|max:50',
+            'selected_items' => 'nullable|string',
             'special_requests' => 'nullable|string|max:1000',
-            'selected_items' => 'nullable|array',
         ]);
 
         if ($validator->fails()) {
@@ -89,11 +86,6 @@ class EventBookingController extends Controller
         }
 
         $validated = $validator->validated();
-
-        if (isset($validated['selected_items'])) {
-            $validated['selected_items'] = implode(', ', $validated['selected_items']);
-        }
-
         $validated['status'] = 'pending';
 
         $booking = Booking::create($validated);
@@ -143,7 +135,9 @@ class EventBookingController extends Controller
             'event_type' => 'required|string|in:Wedding,Corporate Event,Celebration,Social Gathering',
             'event_date' => 'required|date|after:today',
             'guest_count' => 'required|integer|min:1|max:10000',
-            'food_preference' => 'required|string|in:Vegetarian',
+            'package_id' => 'required|exists:packages,id', // Added
+            'food_preference' => 'required|string|max:50',
+            'selected_items' => 'nullable|string',
             'special_requests' => 'nullable|string|max:1000',
         ]);
 
@@ -165,36 +159,32 @@ class EventBookingController extends Controller
      */
     private function createQuotationFromBooking(Booking $booking)
     {
-        // Calculate pricing: ₹500 per guest as base estimate
-        $pricePerGuest = 500;
+        $package = \App\Models\Package::find($booking->package_id);
+        
+        // Calculate pricing
+        $pricePerGuest = $package ? $package->price : 0;
         $subtotal = $booking->guest_count * $pricePerGuest;
         $taxRate = 0.18;  // 18% GST
         $tax = $subtotal * $taxRate;
         $total = $subtotal + $tax;
 
-        // Prepare items array from selected items
+        // Prepare items array
         $items = [];
-        if ($booking->selected_items) {
-            $selectedItems = explode(', ', $booking->selected_items);
-            foreach ($selectedItems as $item) {
-                $items[] = [
-                    'name' => $item,
-                    'quantity' => $booking->guest_count,
-                    'price' => 0,  // To be updated by admin
-                    'total' => 0
-                ];
-            }
+        if ($package) {
+            $items[] = [
+                'name' => $package->name . ' (' . $package->type . ')',
+                'quantity' => $booking->guest_count,
+                'price' => $package->price,
+                'total' => $subtotal
+            ];
         }
 
         // Combine notes
         $notes = '';
-        if ($booking->dish_suggestions) {
-            $notes .= 'Dish Suggestions: ' . $booking->dish_suggestions . "\n\n";
-        }
         if ($booking->special_requests) {
             $notes .= 'Special Requests: ' . $booking->special_requests;
         }
-        $notes .= "\n\nAuto-generated from Booking #" . $booking->id . "\nThis is an estimated quotation. Admin will finalize pricing.";
+        $notes .= "\n\nAuto-generated from Booking #" . $booking->id . "\nPackage: " . ($package ? $package->name : 'Unknown');
 
         // Create quotation
         $quotation = Quotation::create([
@@ -211,6 +201,8 @@ class EventBookingController extends Controller
             'total' => $total,
             'notes' => $notes,
             'status' => 'draft',
+            'booking_id' => $booking->id,
+            'customer_id' => null // Could link to customer if exists
         ]);
 
         return $quotation;

@@ -76,6 +76,7 @@ Route::prefix('admin')->name('admin.')->middleware('admin.auth')->group(function
     Route::get('quotations/{quotation}/whatsapp', [App\Http\Controllers\Admin\QuotationController::class, 'shareWhatsApp'])->name('quotations.whatsapp');
     Route::post('quotations/{quotation}/email', [App\Http\Controllers\Admin\QuotationController::class, 'sendEmail'])->name('quotations.email');
     Route::resource('quotations', App\Http\Controllers\Admin\QuotationController::class);
+Route::resource('packages', App\Http\Controllers\Admin\PackageController::class);
 
     // Customers
     Route::resource('customers', App\Http\Controllers\Admin\CustomerController::class);

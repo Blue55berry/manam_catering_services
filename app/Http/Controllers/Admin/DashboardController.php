@@ -25,7 +25,7 @@ class DashboardController extends Controller
             'revenue' => \App\Models\Order::sum('total'),
         ];
 
-        $recentBookings = Booking::orderBy('created_at', 'desc')->limit(5)->get();
+        $recentBookings = Booking::with('package')->orderBy('created_at', 'desc')->limit(5)->get();
         $recentContacts = Contact::orderBy('created_at', 'desc')->limit(5)->get();
         $recentOrders = \App\Models\Order::orderBy('created_at', 'desc')->limit(5)->get();
         $menuItems = MenuItem::orderBy('created_at', 'desc')->limit(5)->get();

@@ -160,15 +160,18 @@
         if (!eventDate?.value) { showError(eventDate, 'Event date is required'); isValid = false; }
         if (!guestCount?.value || guestCount.value < 1) { showError(guestCount, 'Valid guest count required'); isValid = false; }
 
-        if (!pref) {
-            const prefContainer = document.querySelector('.royal-pref-options');
-            if (prefContainer) {
+        const packageId = document.getElementById('selectedPackageId');
+        if (!packageId?.value) {
+            const packageLabel = document.querySelector('label[for="selectedPackageId"]') || document.querySelector('.package-grid-container');
+            if (packageLabel) {
                 const errorMsg = document.createElement('div');
-                errorMsg.className = 'text-danger mt-2 small';
-                errorMsg.textContent = 'Please select a culinary preference';
-                prefContainer.parentNode.appendChild(errorMsg);
-                isValid = false;
+                errorMsg.className = 'text-danger mt-2 small package-error';
+                errorMsg.textContent = 'Please select a catering package';
+                if (!document.querySelector('.package-error')) {
+                    packageLabel.parentNode.insertBefore(errorMsg, packageLabel.nextSibling);
+                }
             }
+            isValid = false;
         }
 
         return isValid;

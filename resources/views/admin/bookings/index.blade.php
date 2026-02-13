@@ -84,7 +84,8 @@
                             <th>Event Type</th>
                             <th>Event Date</th>
                             <th>Guests</th>
-                            <th>Food</th>
+                            <th>Package</th>
+                            <th>Preference</th>
                             <th>Contact</th>
                             <th>Status</th>
                             <th>Submitted</th>
@@ -124,17 +125,22 @@
                                     </span>
                                 </td>
                                 <td>
-                                    @if($booking->food_preference == 'Vegetarian')
+                                    <span class="badge-modern badge-info">
+                                        <i class="fa fa-tag me-1"></i> {{ $booking->package->name ?? 'Custom' }}
+                                    </span>
+                                </td>
+                                <td>
+                                    @if($booking->food_preference == 'Vegetarian' || $booking->food_preference == 'Veg')
                                         <span class="badge-modern" style="background-color: #d1fae5; color: #065f46;">
                                             <i class="fa fa-leaf me-1"></i> Veg
                                         </span>
-                                    @elseif($booking->food_preference == 'Non-Vegetarian')
+                                    @elseif($booking->food_preference == 'Non-Vegetarian' || $booking->food_preference == 'Non-Veg')
                                         <span class="badge-modern" style="background-color: #fee2e2; color: #991b1b;">
                                             <i class="fa fa-drumstick-bite me-1"></i> Non-Veg
                                         </span>
                                     @else
                                         <span class="badge-modern badge-info">
-                                            <i class="fa fa-utensils me-1"></i> Both
+                                            <i class="fa fa-utensils me-1"></i> {{ $booking->food_preference ?? 'Both' }}
                                         </span>
                                     @endif
                                 </td>

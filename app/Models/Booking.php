@@ -27,6 +27,7 @@ class Booking extends Model
         'dish_suggestions',
         'special_requests',
         'selected_items',
+        'package_id',
         'status',
     ];
 
@@ -38,6 +39,7 @@ class Booking extends Model
     protected $casts = [
         'event_date' => 'date',
         'guest_count' => 'integer',
+        'package_id' => 'integer',
     ];
 
     /**
@@ -69,6 +71,14 @@ class Booking extends Model
     public function event()
     {
         return $this->belongsTo(Event::class);
+    }
+
+    /**
+     * Get the package associated with this booking.
+     */
+    public function package()
+    {
+        return $this->belongsTo(Package::class);
     }
 
     /**

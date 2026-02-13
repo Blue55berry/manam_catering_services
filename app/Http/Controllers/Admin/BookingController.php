@@ -10,8 +10,9 @@ class BookingController extends Controller
 {
     public function index()
     {
-        $bookings = Booking::with('event')->orderBy('created_at', 'desc')->get();
-        return view('admin.bookings.index', compact('bookings'));
+        $bookings = Booking::with(['event', 'package'])->orderBy('created_at', 'desc')->get();
+        $recentBookings = Booking::with('package')->orderBy('created_at', 'desc')->limit(5)->get();
+        return view('admin.bookings.index', compact('bookings', 'recentBookings'));
     }
 
     public function show(Booking $booking)
